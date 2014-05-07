@@ -7,11 +7,12 @@ module WorldCat
       property :work_uri, :predicate => EXAMPLE_OF_WORK, :type => RDF::URI
       property :num_pages, :predicate => NUMBER_OF_PAGES, :type => XSD.string
       property :date_published, :predicate => DATE_PUBLISHED, :type => XSD.string
+      property :type, :predicate => RDF.type, :type => RDF::URI
       
       def id
         self.subject
       end
-      
+            
       def self.find(oclc_number, wskey)
         
         # Make the HTTP Request for the data

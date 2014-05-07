@@ -35,5 +35,10 @@ describe WorldCat::Discovery::Bib do
     it "should have the right date published" do
       @bib.date_published.should == "1994"
     end
+    
+    it "should have the right type" do
+      @bib.type.should == RDF::URI.new('http://schema.org/Book')
+    end
+    
   end
 end
