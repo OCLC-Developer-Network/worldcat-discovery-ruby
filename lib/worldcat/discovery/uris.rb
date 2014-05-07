@@ -20,6 +20,9 @@ module WorldCat
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_PLACE_OF_PUB       = RDF::URI.new('http://purl.org/library/placeOfPublication')
+    DISCOVERY_TOTAL_RESULTS  = RDF::URI.new('http://worldcat.org/searcho/totalResults')
+    DISCOVERY_ITEMS_PER_PAGE = RDF::URI.new('http://worldcat.org/searcho/itemsPerPage')
+    DISCOVERY_START_INDEX    = RDF::URI.new('http://worldcat.org/searcho/startIndex')
     
   end
 end

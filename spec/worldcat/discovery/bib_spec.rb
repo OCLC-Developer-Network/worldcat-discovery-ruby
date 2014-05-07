@@ -141,5 +141,17 @@ describe WorldCat::Discovery::Bib do
       uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
       @results.id.should == uri
     end
+    
+    it "should have the right number for total results" do
+      @results.total_results.should == 1120
+    end
+
+    it "should have the right start index" do
+      @results.start_index.should == 0
+    end
+
+    it "should have the right items per page" do
+      @results.items_per_page.should == 10
+    end
   end
 end
