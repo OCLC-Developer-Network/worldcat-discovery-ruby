@@ -1,7 +1,7 @@
 require_relative '../../spec_helper'
 
 describe WorldCat::Discovery::Bib do
-  context "when loading a resource from the RDF data" do
+  context "when finding a single bib resource from the RDF data" do
     before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
       stub_request(:get, url).to_return(
@@ -120,8 +120,26 @@ describe WorldCat::Discovery::Bib do
         descriptions.should include(line.chomp)
       end
     end
+  end
+  
+  context "when searching for bib resources" do
+    before(:all) do
+      url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10'
+      stub_request(:get, url).to_return(
+          :body => body_content("bib_search.rdf"),
+          :status => 200)
+
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+      @results = WorldCat::Discovery::Bib.search(wskey, :q => 'wittgenstein reader', :facets => 'author:10')
+    end
     
+    it "should return a results set" do
+      @results.class.should == WorldCat::Discovery::SearchResults
+    end
     
-    
+    it "should contain the right id" do
+      uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+      @results.id.should == uri
+    end
   end
 end

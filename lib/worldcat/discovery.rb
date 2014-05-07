@@ -13,6 +13,7 @@ require "worldcat/discovery/person"
 require "worldcat/discovery/place"
 require "worldcat/discovery/organization"
 require "worldcat/discovery/subject"
+require "worldcat/discovery/search_results"
 
 module WorldCat
   module Discovery

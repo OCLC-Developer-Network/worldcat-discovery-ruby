@@ -29,6 +29,22 @@ module WorldCat
       def id
         self.subject
       end
+      
+      def self.search(wskey, params)
+        
+        # Make the HTTP request for the data
+        url = "#{Bib.production_url}/search?q=#{CGI.escape(params[:q])}&facets=#{params[:facets]}"
+        auth = wskey.hmac_signature('GET', url)
+        resource = RestClient::Resource.new url
+        response = resource.get(:authorization => auth, :accept => 'application/rdf+xml')
+        
+        # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
+        Spira.repository = RDF::Repository.new.from_rdfxml(response)
+        search_results = Spira.repository.query(:predicate => RDF.type, :object => SCHEMA_SEARCH_RES_PAGE).first.subject.as(SearchResults)
+        
+        # WorldCat::Discovery::SearchResults.new
+        search_results
+      end
             
       def self.find(oclc_number, wskey)
         
