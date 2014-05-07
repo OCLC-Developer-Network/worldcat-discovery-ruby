@@ -12,6 +12,10 @@ describe WorldCat::Discovery::Bib do
       @bib = WorldCat::Discovery::Bib.find(30780581, wskey)
     end
     
+    it "should have the the right id" do
+      @bib.id.should == "http://www.worldcat.org/oclc/30780581"
+    end
+    
     it "should have the right name" do
       @bib.name.should == "The Wittgenstein reader"
     end

@@ -4,6 +4,9 @@ module WorldCat
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
       
+      def id
+        self.subject
+      end
       
       def self.find(oclc_number, wskey)
         
