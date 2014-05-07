@@ -58,6 +58,13 @@ describe WorldCat::Discovery::Bib do
       @bib.publisher.name.should == "B. Blackwell"
     end
     
+    it "should have the right contributors" do
+      @bib.contributors.size.should == 1
+      contributor = @bib.contributors.first
+      contributor.class.should == WorldCat::Discovery::Person
+      contributor.name.should == "Kenny, Anthony, 1931-"
+    end
+    
     it "should have the right subjects" do
       subjects = @bib.subjects
       subjects.each {|subject| subject.class.should == WorldCat::Discovery::Subject}
@@ -113,6 +120,8 @@ describe WorldCat::Discovery::Bib do
         descriptions.should include(line.chomp)
       end
     end
+    
+    
     
   end
 end

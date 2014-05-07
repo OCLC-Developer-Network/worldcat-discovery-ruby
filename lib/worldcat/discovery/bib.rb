@@ -15,6 +15,7 @@ module WorldCat
       has_many :work_example_uris, :predicate => SCHEMA_WORK_EXAMPLE, :type => RDF::URI
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
       has_many :descriptions, :predicate => SCHEMA_DESCRIPTION, :type => XSD.string
+      has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
       
       def author
         author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first

@@ -4,6 +4,7 @@ module WorldCat
     GENERIC_RESOURCE       = RDF::URI.new('http://www.w3.org/2006/gen/ont#ContentTypeGenericResource')
     SCHEMA_ABOUT           = RDF::URI.new('http://schema.org/about')
     SCHEMA_AUTHOR          = RDF::URI.new('http://schema.org/author')
+    SCHEMA_CONTRIBUTOR     = RDF::URI.new('http://schema.org/contributor')
     SCHEMA_NAME            = RDF::URI.new('http://schema.org/name')
     SCHEMA_BOOK            = RDF::URI.new('http://schema.org/Book')
     SCHEMA_PERSON          = RDF::URI.new('http://schema.org/Person')
