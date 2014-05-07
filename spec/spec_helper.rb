@@ -22,3 +22,7 @@ RSpec.configure do |config|
   #     --seed 1234
   # config.order = 'random'
 end
+
+def body_content(filename)
+  File.new("#{File.expand_path(File.dirname(__FILE__))}/support/responses/#{filename}")
+end
