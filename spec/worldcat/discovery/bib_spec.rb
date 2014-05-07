@@ -31,5 +31,9 @@ describe WorldCat::Discovery::Bib do
     it "should have the right number of pages" do
       @bib.num_pages.should == "312"
     end
+    
+    it "should have the right date published" do
+      @bib.date_published.should == "1994"
+    end
   end
 end

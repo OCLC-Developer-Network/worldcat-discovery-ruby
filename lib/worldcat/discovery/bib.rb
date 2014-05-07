@@ -6,6 +6,7 @@ module WorldCat
       property :oclc_number, :predicate => OCLC_NUMBER, :type => XSD.integer
       property :work_uri, :predicate => EXAMPLE_OF_WORK, :type => RDF::URI
       property :num_pages, :predicate => NUMBER_OF_PAGES, :type => XSD.string
+      property :date_published, :predicate => DATE_PUBLISHED, :type => XSD.string
       
       def id
         self.subject

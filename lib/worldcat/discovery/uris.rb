@@ -10,6 +10,7 @@ module WorldCat
     WORK_EXAMPLE      = RDF::URI.new('http://schema.org/workExample')
     EXAMPLE_OF_WORK   = RDF::URI.new('http://schema.org/exampleOfWork')
     NUMBER_OF_PAGES   = RDF::URI.new('http://schema.org/numberOfPages')
+    DATE_PUBLISHED    = RDF::URI.new('http://schema.org/datePublished')
     
   end
 end
