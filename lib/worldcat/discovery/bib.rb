@@ -8,6 +8,7 @@ module WorldCat
       property :num_pages, :predicate => NUMBER_OF_PAGES, :type => XSD.string
       property :date_published, :predicate => DATE_PUBLISHED, :type => XSD.string
       property :type, :predicate => RDF.type, :type => RDF::URI
+      property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
       
       def id
         self.subject

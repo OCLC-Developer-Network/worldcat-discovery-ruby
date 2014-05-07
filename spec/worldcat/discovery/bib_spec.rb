@@ -40,5 +40,9 @@ describe WorldCat::Discovery::Bib do
       @bib.type.should == RDF::URI.new('http://schema.org/Book')
     end
     
+    it "should have the right OWL same as property" do
+      @bib.same_as.should == RDF::URI.new("info:oclcnum/30780581")
+    end
+    
   end
 end

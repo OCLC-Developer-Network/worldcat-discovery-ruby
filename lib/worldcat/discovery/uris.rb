@@ -12,6 +12,7 @@ module WorldCat
     EXAMPLE_OF_WORK   = RDF::URI.new('http://schema.org/exampleOfWork')
     NUMBER_OF_PAGES   = RDF::URI.new('http://schema.org/numberOfPages')
     DATE_PUBLISHED    = RDF::URI.new('http://schema.org/datePublished')
+    OWL_SAME_AS       = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     
   end
 end
