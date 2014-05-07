@@ -3,7 +3,7 @@ module WorldCat
     class Bib < Spira::Base
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
-      property :oclc_number, :predicate => OCLC_NUMBER, :type => XSD.integer
+      property :oclc_number, :predicate => LIB_OCLC_NUMBER, :type => XSD.integer
       property :work_uri, :predicate => SCHEMA_EXAMPLE_OF_WORK, :type => RDF::URI
       property :num_pages, :predicate => SCHEMA_NUMBER_OF_PAGES, :type => XSD.string
       property :date_published, :predicate => SCHEMA_DATE_PUBLISHED, :type => XSD.string
@@ -13,6 +13,7 @@ module WorldCat
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
       has_many :work_example_uris, :predicate => SCHEMA_WORK_EXAMPLE, :type => RDF::URI
+      has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
       
       def author
         author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first

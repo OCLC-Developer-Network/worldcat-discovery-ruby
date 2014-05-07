@@ -86,5 +86,24 @@ describe WorldCat::Discovery::Bib do
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193618'))
     end
     
+    it "should have the right places of publication" do
+      places_of_publication = @bib.places_of_publication
+      places_of_publication.size.should == 3
+      
+      oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A2'); p}
+      oxford.class.should == WorldCat::Discovery::Place
+      oxford.type.should == 'http://schema.org/Place'
+      oxford.name.should == 'Oxford, UK'
+      
+      oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A6'); p}
+      oxford.class.should == WorldCat::Discovery::Place
+      oxford.type.should == 'http://schema.org/Place'
+      oxford.name.should == 'Cambridge, Mass., USA'
+      
+      england = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::URI('http://id.loc.gov/vocabulary/countries/enk'); p}
+      england.class.should == WorldCat::Discovery::Place
+      england.type.should == 'http://schema.org/Country'      
+    end
+    
   end
 end
