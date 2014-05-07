@@ -12,6 +12,7 @@ module WorldCat
       property :language, :predicate => SCHEMA_IN_LANGUAGE, :type => XSD.string
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
+      has_many :work_example_uris, :predicate => SCHEMA_WORK_EXAMPLE, :type => RDF::URI
       
       def author
         author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first

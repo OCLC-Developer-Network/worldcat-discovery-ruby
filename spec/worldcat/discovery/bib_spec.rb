@@ -78,5 +78,13 @@ describe WorldCat::Discovery::Bib do
       subject_names.should include("Philosophy.")
     end
     
+    it "should have the right work example URIs" do
+      work_example_uris = @bib.work_example_uris
+      work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193623'))
+      work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193616'))
+      work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193626'))
+      work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193618'))
+    end
+    
   end
 end
