@@ -4,6 +4,8 @@ module WorldCat
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
       property :oclc_number, :predicate => OCLC_NUMBER, :type => XSD.integer
+      property :work_uri, :predicate => EXAMPLE_OF_WORK, :type => RDF::URI
+      property :num_pages, :predicate => NUMBER_OF_PAGES, :type => XSD.string
       
       def id
         self.subject

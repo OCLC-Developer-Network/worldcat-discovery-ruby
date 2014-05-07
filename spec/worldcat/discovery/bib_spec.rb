@@ -12,7 +12,7 @@ describe WorldCat::Discovery::Bib do
       @bib = WorldCat::Discovery::Bib.find(30780581, wskey)
     end
     
-    it "should have the the right id" do
+    it "should have the right id" do
       @bib.id.should == "http://www.worldcat.org/oclc/30780581"
     end
     
@@ -22,6 +22,14 @@ describe WorldCat::Discovery::Bib do
     
     it "should have the right OCLC number" do
       @bib.oclc_number.should == 30780581
+    end
+    
+    it "should have the right work URI" do
+      @bib.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/45185752')
+    end
+
+    it "should have the right number of pages" do
+      @bib.num_pages.should == "312"
     end
   end
 end
