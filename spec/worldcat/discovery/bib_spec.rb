@@ -53,5 +53,10 @@ describe WorldCat::Discovery::Bib do
       @bib.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
     end
     
+    it "should have the right publisher" do
+      @bib.publisher.class.should == WorldCat::Discovery::Organization
+      @bib.publisher.name.should == "B. Blackwell"
+    end
+    
   end
 end

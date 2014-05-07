@@ -13,6 +13,7 @@ module WorldCat
     NUMBER_OF_PAGES   = RDF::URI.new('http://schema.org/numberOfPages')
     DATE_PUBLISHED    = RDF::URI.new('http://schema.org/datePublished')
     IN_LANGUAGE       = RDF::URI.new('http://schema.org/inLanguage')
+    SCHEMA_PUBLISHER  = RDF::URI.new('http://schema.org/publisher')
     OWL_SAME_AS       = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     OCLC_NUMBER       = RDF::URI.new('http://purl.org/library/oclcnum')
     

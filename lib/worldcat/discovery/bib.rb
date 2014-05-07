@@ -10,7 +10,7 @@ module WorldCat
       property :type, :predicate => RDF.type, :type => RDF::URI
       property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
       property :language, :predicate => IN_LANGUAGE, :type => XSD.string
-      # property :author, :predicate => SCHEMA_AUTHOR, :type => 'Author'
+      property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       
       def author
         author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first

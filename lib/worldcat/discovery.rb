@@ -10,6 +10,7 @@ require "worldcat/discovery/uris"
 require "worldcat/discovery/generic_resource"
 require "worldcat/discovery/bib"
 require "worldcat/discovery/person"
+require "worldcat/discovery/organization"
 
 module WorldCat
   module Discovery
