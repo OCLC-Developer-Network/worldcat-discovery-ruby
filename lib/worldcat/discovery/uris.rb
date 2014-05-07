@@ -18,6 +18,7 @@ module WorldCat
     SCHEMA_DESCRIPTION     = RDF::URI.new('http://schema.org/description')
     SCHEMA_SEARCH_RES_PAGE = RDF::URI.new('http://schema.org/SearchResultsPage')
     SCHEMA_SIGNIFICANT_LINK = RDF::URI.new('http://schema.org/significantLink')
+    SCHEMA_BOOK_EDITION    = RDF::URI.new('http://schema.org/bookEdition')
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_PLACE_OF_PUB       = RDF::URI.new('http://purl.org/library/placeOfPublication')

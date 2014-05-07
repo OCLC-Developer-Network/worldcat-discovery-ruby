@@ -4,69 +4,67 @@ describe WorldCat::Discovery::Bib do
   context "when finding a single bib resource from the RDF data" do
     before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
-      stub_request(:get, url).to_return(
-          :body => body_content("30780581.rdf"),
-          :status => 200)
+      stub_request(:get, url).to_return(:body => body_content("30780581.rdf"), :status => 200)
 
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      @bib = WorldCat::Discovery::Bib.find(30780581, wskey)
+      @wittgenstein_reader = WorldCat::Discovery::Bib.find(30780581, wskey)
     end
     
     it "should have the right id" do
-      @bib.id.should == "http://www.worldcat.org/oclc/30780581"
+      @wittgenstein_reader.id.should == "http://www.worldcat.org/oclc/30780581"
     end
     
     it "should have the right name" do
-      @bib.name.should == "The Wittgenstein reader"
+      @wittgenstein_reader.name.should == "The Wittgenstein reader"
     end
     
     it "should have the right OCLC number" do
-      @bib.oclc_number.should == 30780581
+      @wittgenstein_reader.oclc_number.should == 30780581
     end
     
     it "should have the right work URI" do
-      @bib.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/45185752')
+      @wittgenstein_reader.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/45185752')
     end
 
     it "should have the right number of pages" do
-      @bib.num_pages.should == "312"
+      @wittgenstein_reader.num_pages.should == "312"
     end
     
     it "should have the right date published" do
-      @bib.date_published.should == "1994"
+      @wittgenstein_reader.date_published.should == "1994"
     end
     
     it "should have the right type" do
-      @bib.type.should == RDF::URI.new('http://schema.org/Book')
+      @wittgenstein_reader.type.should == RDF::URI.new('http://schema.org/Book')
     end
     
     it "should have the right OWL same as property" do
-      @bib.same_as.should == RDF::URI.new("info:oclcnum/30780581")
+      @wittgenstein_reader.same_as.should == RDF::URI.new("info:oclcnum/30780581")
     end
     
     it "should have the right language" do
-      @bib.language.should == "en"
+      @wittgenstein_reader.language.should == "en"
     end
     
     it "should have the right author" do
-      @bib.author.class.should == WorldCat::Discovery::Person
-      @bib.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
+      @wittgenstein_reader.author.class.should == WorldCat::Discovery::Person
+      @wittgenstein_reader.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
     end
     
     it "should have the right publisher" do
-      @bib.publisher.class.should == WorldCat::Discovery::Organization
-      @bib.publisher.name.should == "B. Blackwell"
+      @wittgenstein_reader.publisher.class.should == WorldCat::Discovery::Organization
+      @wittgenstein_reader.publisher.name.should == "B. Blackwell"
     end
     
     it "should have the right contributors" do
-      @bib.contributors.size.should == 1
-      contributor = @bib.contributors.first
+      @wittgenstein_reader.contributors.size.should == 1
+      contributor = @wittgenstein_reader.contributors.first
       contributor.class.should == WorldCat::Discovery::Person
       contributor.name.should == "Kenny, Anthony, 1931-"
     end
     
     it "should have the right subjects" do
-      subjects = @bib.subjects
+      subjects = @wittgenstein_reader.subjects
       subjects.each {|subject| subject.class.should == WorldCat::Discovery::Subject}
       
       subject_ids = subjects.map {|subject| subject.id}
@@ -86,7 +84,7 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should have the right work example URIs" do
-      work_example_uris = @bib.work_example_uris
+      work_example_uris = @wittgenstein_reader.work_example_uris
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193623'))
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193616'))
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193626'))
@@ -94,7 +92,7 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should have the right places of publication" do
-      places_of_publication = @bib.places_of_publication
+      places_of_publication = @wittgenstein_reader.places_of_publication
       places_of_publication.size.should == 3
       
       oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A2'); p}
@@ -113,21 +111,28 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should have the right descriptions" do
-      descriptions = @bib.descriptions
+      descriptions = @wittgenstein_reader.descriptions
       descriptions.size.should == 2
       
       File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/30780581_descriptions.txt").each do |line|
         descriptions.should include(line.chomp)
       end
     end
+    
+    it "should have the right book edition" do
+      url = 'https://beta.worldcat.org/discovery/bib/data/57422379'
+      stub_request(:get, url).to_return(:body => body_content("57422379.rdf"), :status => 200)
+
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+      bib_typescript = WorldCat::Discovery::Bib.find(57422379, wskey)
+      bib_typescript.book_edition.should == "German-English scholar's ed."
+    end
   end
   
   context "when searching for bib resources" do
     before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10'
-      stub_request(:get, url).to_return(
-          :body => body_content("bib_search.rdf"),
-          :status => 200)
+      stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
 
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
       @results = WorldCat::Discovery::Bib.search(wskey, :q => 'wittgenstein reader', :facets => 'author:10')
@@ -169,9 +174,6 @@ describe WorldCat::Discovery::Bib do
     
     it "should return the bibs in sorted order" do
       0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
-      # 
-      # @results.bibs.first.display_position.should == 1
-      # @results.bibs.last.display_position.should == 10
     end
   end
 end

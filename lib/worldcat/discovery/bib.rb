@@ -12,6 +12,7 @@ module WorldCat
       property :language, :predicate => SCHEMA_IN_LANGUAGE, :type => XSD.string
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
+      property :book_edition, :predicate => SCHEMA_BOOK_EDITION, :type => XSD.string
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
       has_many :work_example_uris, :predicate => SCHEMA_WORK_EXAMPLE, :type => RDF::URI
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'

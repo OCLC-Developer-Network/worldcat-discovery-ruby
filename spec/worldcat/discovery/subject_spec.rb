@@ -8,11 +8,6 @@ describe WorldCat::Discovery::Person do
       
       philosophy = RDF::URI.new('http://id.worldcat.org/fast/1060777')
       @subject = philosophy.as(WorldCat::Discovery::Subject)
-      # 
-      # gr_uri  = RDF::URI.new('http://www.w3.org/2006/gen/ont#ContentTypeGenericResource')
-      # generic_resource = Spira.repository.query(:predicate => RDF.type, :object => gr_uri).first
-      # resource = generic_resource.subject.as(WorldCat::Discovery::GenericResource)
-      # @person = resource.about.author.subject.as(WorldCat::Discovery::Person)
     end
     
     it "should produce have the right class" do 
