@@ -23,5 +23,9 @@ describe WorldCat::Discovery::Person do
     it "should have the right id" do
       @person.id.should == 'http://viaf.org/viaf/24609378'
     end
+    
+    it "should have the right type" do
+      @person.type.should == 'http://schema.org/Person'
+    end
   end
 end

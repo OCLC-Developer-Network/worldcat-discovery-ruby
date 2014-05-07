@@ -3,6 +3,7 @@ module WorldCat
     class Person < Spira::Base
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
+      property :type, :predicate => RDF.type, :type => RDF::URI
       
       def id
         self.subject
