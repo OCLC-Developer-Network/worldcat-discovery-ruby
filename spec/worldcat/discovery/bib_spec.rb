@@ -44,5 +44,9 @@ describe WorldCat::Discovery::Bib do
       @bib.same_as.should == RDF::URI.new("info:oclcnum/30780581")
     end
     
+    it "should have the right language" do
+      @bib.language.should == "en"
+    end
+    
   end
 end

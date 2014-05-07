@@ -9,6 +9,7 @@ module WorldCat
       property :date_published, :predicate => DATE_PUBLISHED, :type => XSD.string
       property :type, :predicate => RDF.type, :type => RDF::URI
       property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
+      property :language, :predicate => IN_LANGUAGE, :type => XSD.string
       
       def id
         self.subject
