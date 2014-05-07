@@ -4,12 +4,12 @@ module WorldCat
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
       property :oclc_number, :predicate => OCLC_NUMBER, :type => XSD.integer
-      property :work_uri, :predicate => EXAMPLE_OF_WORK, :type => RDF::URI
-      property :num_pages, :predicate => NUMBER_OF_PAGES, :type => XSD.string
-      property :date_published, :predicate => DATE_PUBLISHED, :type => XSD.string
+      property :work_uri, :predicate => SCHEMA_EXAMPLE_OF_WORK, :type => RDF::URI
+      property :num_pages, :predicate => SCHEMA_NUMBER_OF_PAGES, :type => XSD.string
+      property :date_published, :predicate => SCHEMA_DATE_PUBLISHED, :type => XSD.string
       property :type, :predicate => RDF.type, :type => RDF::URI
       property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
-      property :language, :predicate => IN_LANGUAGE, :type => XSD.string
+      property :language, :predicate => SCHEMA_IN_LANGUAGE, :type => XSD.string
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
       
