@@ -7,8 +7,9 @@ require "spira"
 
 require "worldcat/discovery/version"
 require "worldcat/discovery/uris"
-require "worldcat/discovery/bib"
 require "worldcat/discovery/generic_resource"
+require "worldcat/discovery/bib"
+require "worldcat/discovery/person"
 
 module WorldCat
   module Discovery

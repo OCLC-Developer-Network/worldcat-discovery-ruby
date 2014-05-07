@@ -6,6 +6,7 @@ module WorldCat
     SCHEMA_AUTHOR     = RDF::URI.new('http://schema.org/author')
     SCHEMA_NAME       = RDF::URI.new('http://schema.org/name')
     SCHEMA_BOOK       = RDF::URI.new('http://schema.org/Book')
+    SCHEMA_PERSON     = RDF::URI.new('http://schema.org/Person')
     SCHEMA_INTANGIBLE = RDF::URI.new('http://schema.org/Intangible')
     WORK_EXAMPLE      = RDF::URI.new('http://schema.org/workExample')
     EXAMPLE_OF_WORK   = RDF::URI.new('http://schema.org/exampleOfWork')

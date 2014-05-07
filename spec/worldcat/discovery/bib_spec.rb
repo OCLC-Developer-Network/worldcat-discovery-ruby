@@ -48,5 +48,10 @@ describe WorldCat::Discovery::Bib do
       @bib.language.should == "en"
     end
     
+    it "should have the right author" do
+      @bib.author.class.should == WorldCat::Discovery::Person
+      @bib.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
+    end
+    
   end
 end

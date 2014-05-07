@@ -10,6 +10,16 @@ module WorldCat
       property :type, :predicate => RDF.type, :type => RDF::URI
       property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
       property :language, :predicate => IN_LANGUAGE, :type => XSD.string
+      # property :author, :predicate => SCHEMA_AUTHOR, :type => 'Author'
+      
+      def author
+        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first
+        author_type = Spira.repository.query(:subject => author_stmt.object, :predicate => RDF.type).first
+        case author_type.object
+        when SCHEMA_PERSON then author_stmt.object.as(Person)
+        else nil
+        end
+      end
       
       def id
         self.subject
