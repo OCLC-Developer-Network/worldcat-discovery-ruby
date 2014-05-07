@@ -6,6 +6,7 @@ module WorldCat
     SCHEMA_AUTHOR     = RDF::URI.new('http://schema.org/author')
     SCHEMA_NAME       = RDF::URI.new('http://schema.org/name')
     SCHEMA_INTANGIBLE = RDF::URI.new('http://schema.org/Intangible')
+    OCLC_NUMBER       = RDF::URI.new('http://purl.org/library/oclcnum')
     
   end
 end

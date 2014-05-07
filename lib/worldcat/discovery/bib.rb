@@ -3,6 +3,7 @@ module WorldCat
     class Bib < Spira::Base
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
+      property :oclc_number, :predicate => OCLC_NUMBER, :type => XSD.integer
       
       def id
         self.subject

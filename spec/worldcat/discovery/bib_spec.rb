@@ -19,5 +19,9 @@ describe WorldCat::Discovery::Bib do
     it "should have the right name" do
       @bib.name.should == "The Wittgenstein reader"
     end
+    
+    it "should have the right OCLC number" do
+      @bib.oclc_number.should == 30780581
+    end
   end
 end
