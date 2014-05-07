@@ -1,7 +1,8 @@
-require 'rest_client'
+require "equivalent-xml"
 require "rdf"
 require "rdf/rdfxml"
 require "oclc/auth"
+require 'rest_client'
 require "spira"
 
 require "worldcat/discovery/version"
