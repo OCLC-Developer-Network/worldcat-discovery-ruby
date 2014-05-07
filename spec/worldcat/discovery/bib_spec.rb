@@ -153,5 +153,25 @@ describe WorldCat::Discovery::Bib do
     it "should have the right items per page" do
       @results.items_per_page.should == 10
     end
+    
+    it "should have the right number of items" do
+      @results.items.size.should == 10
+    end
+
+    it "should have the right kind of items" do
+      @results.items.each {|item| item.class.should == WorldCat::Discovery::GenericResource}
+    end
+    
+    it "should have respond to a request for its items as bibs" do
+      @results.bibs.size.should == 10
+      @results.bibs.each {|item| item.class.should == WorldCat::Discovery::Bib}
+    end
+    
+    it "should return the bibs in sorted order" do
+      0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
+      # 
+      # @results.bibs.first.display_position.should == 1
+      # @results.bibs.last.display_position.should == 10
+    end
   end
 end

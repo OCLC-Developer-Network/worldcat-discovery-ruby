@@ -17,12 +17,14 @@ module WorldCat
     SCHEMA_PUBLISHER       = RDF::URI.new('http://schema.org/publisher')
     SCHEMA_DESCRIPTION     = RDF::URI.new('http://schema.org/description')
     SCHEMA_SEARCH_RES_PAGE = RDF::URI.new('http://schema.org/SearchResultsPage')
+    SCHEMA_SIGNIFICANT_LINK = RDF::URI.new('http://schema.org/significantLink')
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_PLACE_OF_PUB       = RDF::URI.new('http://purl.org/library/placeOfPublication')
     DISCOVERY_TOTAL_RESULTS  = RDF::URI.new('http://worldcat.org/searcho/totalResults')
     DISCOVERY_ITEMS_PER_PAGE = RDF::URI.new('http://worldcat.org/searcho/itemsPerPage')
     DISCOVERY_START_INDEX    = RDF::URI.new('http://worldcat.org/searcho/startIndex')
+    GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
     
   end
 end
