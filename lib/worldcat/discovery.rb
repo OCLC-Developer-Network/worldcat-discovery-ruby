@@ -11,6 +11,7 @@ require "worldcat/discovery/generic_resource"
 require "worldcat/discovery/bib"
 require "worldcat/discovery/person"
 require "worldcat/discovery/organization"
+require "worldcat/discovery/subject"
 
 module WorldCat
   module Discovery

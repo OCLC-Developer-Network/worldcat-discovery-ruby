@@ -58,5 +58,25 @@ describe WorldCat::Discovery::Bib do
       @bib.publisher.name.should == "B. Blackwell"
     end
     
+    it "should have the right subjects" do
+      subjects = @bib.subjects
+      subjects.each {|subject| subject.class.should == WorldCat::Discovery::Subject}
+      
+      subject_ids = subjects.map {|subject| subject.id}
+      subject_ids.should include(RDF::URI('http://dewey.info/class/192/e20/'))
+      subject_ids.should include(RDF::URI('http://id.loc.gov/authorities/classification/B3376'))
+      subject_ids.should include(RDF::URI('http://id.worldcat.org/fast/1060777'))
+      subject_ids.should include(RDF::Node('A0'))
+      subject_ids.should include(RDF::Node('A1'))
+      subject_ids.should include(RDF::Node('A4'))
+      subject_ids.should include(RDF::Node('A5'))
+      
+      subject_names = subjects.map {|subject| subject.name}
+      subject_names.should include("Filosofia contemporânea--Alemanha.")
+      subject_names.should include("Wissenschaftstheorie.")
+      subject_names.should include("Analytische Philosophie.")
+      subject_names.should include("Philosophy.")
+    end
+    
   end
 end
