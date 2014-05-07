@@ -105,5 +105,14 @@ describe WorldCat::Discovery::Bib do
       england.type.should == 'http://schema.org/Country'      
     end
     
+    it "should have the right descriptions" do
+      descriptions = @bib.descriptions
+      descriptions.size.should == 2
+      
+      File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/30780581_descriptions.txt").each do |line|
+        descriptions.should include(line.chomp)
+      end
+    end
+    
   end
 end

@@ -14,6 +14,7 @@ module WorldCat
     SCHEMA_DATE_PUBLISHED  = RDF::URI.new('http://schema.org/datePublished')
     SCHEMA_IN_LANGUAGE     = RDF::URI.new('http://schema.org/inLanguage')
     SCHEMA_PUBLISHER       = RDF::URI.new('http://schema.org/publisher')
+    SCHEMA_DESCRIPTION     = RDF::URI.new('http://schema.org/description')
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_PLACE_OF_PUB       = RDF::URI.new('http://purl.org/library/placeOfPublication')
