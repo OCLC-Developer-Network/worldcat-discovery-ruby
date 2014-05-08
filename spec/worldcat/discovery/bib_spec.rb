@@ -164,11 +164,11 @@ describe WorldCat::Discovery::Bib do
   
   context "when searching for bib resources" do
     before(:all) do
-      url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10'
+      url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10&facets=inLanguage:10'
       stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
 
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      @results = WorldCat::Discovery::Bib.search(wskey, :q => 'wittgenstein reader', :facets => 'author:10')
+      @results = WorldCat::Discovery::Bib.search(wskey, :q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
     end
     
     it "should return a results set" do
@@ -176,7 +176,7 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should contain the right id" do
-      uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+      uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
       @results.id.should == uri
     end
     
@@ -208,5 +208,7 @@ describe WorldCat::Discovery::Bib do
     it "should return the bibs in sorted order" do
       0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
     end
+    
+    
   end
 end

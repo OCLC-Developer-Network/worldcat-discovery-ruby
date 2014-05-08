@@ -44,7 +44,11 @@ module WorldCat
       def self.search(wskey, params)
         
         # Make the HTTP request for the data
-        url = "#{Bib.production_url}/search?q=#{CGI.escape(params[:q])}&facets=#{params[:facets]}"
+        url = "#{Bib.production_url}/search?q=#{CGI.escape(params[:q])}"
+        if params[:facets]
+          facet_params = params[:facets].map {|facet| "facets=#{CGI.escape(facet)}"}.join("&")
+          url += "&#{facet_params}"
+        end
         auth = wskey.hmac_signature('GET', url)
         resource = RestClient::Resource.new url
         response = resource.get(:authorization => auth, :accept => 'application/rdf+xml')
