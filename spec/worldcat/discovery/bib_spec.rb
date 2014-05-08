@@ -151,6 +151,17 @@ describe WorldCat::Discovery::Bib do
     end
   end
   
+  context "when parsing data for oddities" do
+    it "should handle books with no author" do
+      url = 'https://beta.worldcat.org/discovery/bib/data/45621749'
+      stub_request(:get, url).to_return(:body => body_content("45621749.rdf"), :status => 200)
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+      bib = WorldCat::Discovery::Bib.find(45621749, wskey)
+      
+      bib.author.should == nil
+    end
+  end
+  
   context "when searching for bib resources" do
     before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10'
