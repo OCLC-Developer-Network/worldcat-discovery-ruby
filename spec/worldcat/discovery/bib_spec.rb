@@ -209,6 +209,57 @@ describe WorldCat::Discovery::Bib do
       0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
     end
     
+    context "when asking for facets" do
+      before(:all) do
+        @base_url = 'http://beta.worldcat.org/discovery/bib/search?facets=author:10&' +
+            'facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
+      end
+      
+      it "should have a facet list with the right ID" do
+        @results.facet_list.id.to_s.should == "#{@base_url}#facets"
+      end
+
+      it "should have the correct number of facets" do
+        @results.facets.size.should == 2
+      end
+
+      it "should have the correct facet indices" do
+        facet_indices = @results.facets.map{|facet| facet.index}
+        facet_indices.should include('srw.ap')
+        facet_indices.should include('srw.ln')
+      end
+
+      it "should have facets with the correct IDs" do
+        ids = @results.facets.map{|facet| facet.id.to_s}
+        ids.should include("#{@base_url}#facet:srw.ln")
+        ids.should include("#{@base_url}#facet:srw.ap")
+      end
+
+      it "should have facet values with the correct IDs" do
+        @results.facets.each do |facet|
+          value_ids = facet.values.map{|value| value.id.to_s}
+          0.upto(9) do |i|
+            value_ids.should include("#{@base_url}#facet:#{facet.index}:#{i}")
+          end
+        end
+      end      
+      
+      it "should sort the facet values high to low" do
+        # @results.facets.first.values.first.count.should > @results.facets.first.values.last.count
+        last_count = nil
+        @results.facets.first.values.each do |facet_value|
+          if last_count != nil
+            facet_value.count.should <= last_count
+          end
+          last_count = facet_value.count
+        end
+      end
+      
+      it "should have the correct facet value name" do
+        author_facet = @results.facets.find {|facet| facet if facet.index == 'srw.ap'}
+        author_facet.values.first.name.should.should == 'thomas gary'
+      end
+    end
     
   end
 end

@@ -5,10 +5,6 @@ module WorldCat
       property :body, :predicate => SCHEMA_REVIEW_BODY, :type => XSD.string
       property :type, :predicate => RDF.type, :type => RDF::URI
       
-      def id
-        self.subject
-      end
-
     end
   end
 end

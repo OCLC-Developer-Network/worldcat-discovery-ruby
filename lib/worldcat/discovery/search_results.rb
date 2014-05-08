@@ -5,7 +5,12 @@ module WorldCat
       property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS, :type => XSD.integer
       property :start_index, :predicate => DISCOVERY_START_INDEX, :type => XSD.integer
       property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE, :type => XSD.integer
+      property :facet_list, :predicate => DISCOVERY_FACET_LIST, :type => 'FacetList'
       has_many :items, :predicate => SCHEMA_SIGNIFICANT_LINK, :type => 'GenericResource'
+      
+      def id
+        self.subject
+      end
       
       def bibs
         bibs = self.items.map {|item| item.about}
@@ -19,8 +24,12 @@ module WorldCat
         sorted_bibs
       end
       
-      def id
-        self.subject
+      def facets
+        if self.facet_list
+          self.facet_list.facets
+        else
+          nil
+        end
       end
       
     end

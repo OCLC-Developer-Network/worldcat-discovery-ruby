@@ -29,6 +29,11 @@ module WorldCat
     DISCOVERY_TOTAL_RESULTS  = RDF::URI.new('http://worldcat.org/searcho/totalResults')
     DISCOVERY_ITEMS_PER_PAGE = RDF::URI.new('http://worldcat.org/searcho/itemsPerPage')
     DISCOVERY_START_INDEX    = RDF::URI.new('http://worldcat.org/searcho/startIndex')
+    DISCOVERY_FACET_LIST     = RDF::URI.new('http://worldcat.org/searcho/facetList')
+    DISCOVERY_FACET          = RDF::URI.new('http://worldcat.org/searcho/facet')
+    DISCOVERY_FACET_INDEX    = RDF::URI.new('http://worldcat.org/searcho/facetIndex')
+    DISCOVERY_FACET_COUNT    = RDF::URI.new('http://worldcat.org/searcho/count')
+    DISCOVERY_FACET_VALUE    = RDF::URI.new('http://worldcat.org/searcho/facetValue')
     GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
     
   end

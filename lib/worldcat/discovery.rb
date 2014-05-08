@@ -16,6 +16,9 @@ require "worldcat/discovery/subject"
 require "worldcat/discovery/search_results"
 require "worldcat/discovery/product_model"
 require "worldcat/discovery/review"
+require "worldcat/discovery/facet_list"
+require "worldcat/discovery/facet"
+require "worldcat/discovery/facet_value"
 
 module WorldCat
   module Discovery
