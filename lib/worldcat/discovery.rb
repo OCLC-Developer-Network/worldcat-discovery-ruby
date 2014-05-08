@@ -15,6 +15,7 @@ require "worldcat/discovery/organization"
 require "worldcat/discovery/subject"
 require "worldcat/discovery/search_results"
 require "worldcat/discovery/product_model"
+require "worldcat/discovery/review"
 
 module WorldCat
   module Discovery

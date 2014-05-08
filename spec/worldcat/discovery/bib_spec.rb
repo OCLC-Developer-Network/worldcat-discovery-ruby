@@ -1,7 +1,7 @@
 require_relative '../../spec_helper'
 
 describe WorldCat::Discovery::Bib do
-  context "when finding a single bib resource from the RDF data" do
+  context "when finding a single resource from the RDF data for The Wittgenstein Reader" do
     before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
       stub_request(:get, url).to_return(:body => body_content("30780581.rdf"), :status => 200)
@@ -125,14 +125,29 @@ describe WorldCat::Discovery::Bib do
     it "should have the right isbns" do
       @bib.isbns.sort.should == ['0631193618', '0631193626', '9780631193616', '9780631193623']
     end
-    
-    it "should have the right book edition" do
+  end
+  
+  context "when finding a single resource from the RDF data for The Big Typescript" do
+    before(:all) do
       url = 'https://beta.worldcat.org/discovery/bib/data/57422379'
       stub_request(:get, url).to_return(:body => body_content("57422379.rdf"), :status => 200)
 
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      bib_typescript = WorldCat::Discovery::Bib.find(57422379, wskey)
-      bib_typescript.book_edition.should == "German-English scholar's ed."
+      @bib = WorldCat::Discovery::Bib.find(57422379, wskey)
+    end
+    
+    it "should have the right book edition" do
+      @bib.book_edition.should == "German-English scholar's ed."
+    end
+    
+    it "should have the right reviews" do
+      reviews = @bib.reviews
+      reviews.size.should == 1
+
+      review_bodies = reviews.map {|review| review.body}
+      File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/57422379_reviews.txt").each do |line|
+        review_bodies.should include(line.chomp)
+      end
     end
   end
   

@@ -18,6 +18,8 @@ module WorldCat
     SCHEMA_IN_LANGUAGE     = RDF::URI.new('http://schema.org/inLanguage')
     SCHEMA_PUBLISHER       = RDF::URI.new('http://schema.org/publisher')
     SCHEMA_DESCRIPTION     = RDF::URI.new('http://schema.org/description')
+    SCHEMA_REVIEW          = RDF::URI.new('http://schema.org/reviews')
+    SCHEMA_REVIEW_BODY     = RDF::URI.new('http://schema.org/reviewBody')
     SCHEMA_SEARCH_RES_PAGE = RDF::URI.new('http://schema.org/SearchResultsPage')
     SCHEMA_SIGNIFICANT_LINK = RDF::URI.new('http://schema.org/significantLink')
     SCHEMA_BOOK_EDITION    = RDF::URI.new('http://schema.org/bookEdition')

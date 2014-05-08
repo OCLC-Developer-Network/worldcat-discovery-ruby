@@ -17,6 +17,7 @@ module WorldCat
       has_many :work_examples, :predicate => SCHEMA_WORK_EXAMPLE, :type => 'ProductModel'
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
       has_many :descriptions, :predicate => SCHEMA_DESCRIPTION, :type => XSD.string
+      has_many :reviews, :predicate => SCHEMA_REVIEW, :type => 'Review'
       has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
       
       def id
