@@ -14,10 +14,14 @@ module WorldCat
       property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
       property :book_edition, :predicate => SCHEMA_BOOK_EDITION, :type => XSD.string
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
-      has_many :work_example_uris, :predicate => SCHEMA_WORK_EXAMPLE, :type => RDF::URI
+      has_many :work_examples, :predicate => SCHEMA_WORK_EXAMPLE, :type => 'ProductModel'
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
       has_many :descriptions, :predicate => SCHEMA_DESCRIPTION, :type => XSD.string
       has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
+      
+      def id
+        self.subject
+      end
       
       def author
         author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first
@@ -28,8 +32,8 @@ module WorldCat
         end
       end
       
-      def id
-        self.subject
+      def isbns
+        self.work_examples.map {|product_model| product_model.isbn}.sort
       end
       
       def self.search(wskey, params)

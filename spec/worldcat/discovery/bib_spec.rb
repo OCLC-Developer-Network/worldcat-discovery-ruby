@@ -7,64 +7,64 @@ describe WorldCat::Discovery::Bib do
       stub_request(:get, url).to_return(:body => body_content("30780581.rdf"), :status => 200)
 
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      @wittgenstein_reader = WorldCat::Discovery::Bib.find(30780581, wskey)
+      @bib = WorldCat::Discovery::Bib.find(30780581, wskey)
     end
     
     it "should have the right id" do
-      @wittgenstein_reader.id.should == "http://www.worldcat.org/oclc/30780581"
+      @bib.id.should == "http://www.worldcat.org/oclc/30780581"
     end
     
     it "should have the right name" do
-      @wittgenstein_reader.name.should == "The Wittgenstein reader"
+      @bib.name.should == "The Wittgenstein reader"
     end
     
     it "should have the right OCLC number" do
-      @wittgenstein_reader.oclc_number.should == 30780581
+      @bib.oclc_number.should == 30780581
     end
     
     it "should have the right work URI" do
-      @wittgenstein_reader.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/45185752')
+      @bib.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/45185752')
     end
 
     it "should have the right number of pages" do
-      @wittgenstein_reader.num_pages.should == "312"
+      @bib.num_pages.should == "312"
     end
     
     it "should have the right date published" do
-      @wittgenstein_reader.date_published.should == "1994"
+      @bib.date_published.should == "1994"
     end
     
     it "should have the right type" do
-      @wittgenstein_reader.type.should == RDF::URI.new('http://schema.org/Book')
+      @bib.type.should == RDF::URI.new('http://schema.org/Book')
     end
     
     it "should have the right OWL same as property" do
-      @wittgenstein_reader.same_as.should == RDF::URI.new("info:oclcnum/30780581")
+      @bib.same_as.should == RDF::URI.new("info:oclcnum/30780581")
     end
     
     it "should have the right language" do
-      @wittgenstein_reader.language.should == "en"
+      @bib.language.should == "en"
     end
     
     it "should have the right author" do
-      @wittgenstein_reader.author.class.should == WorldCat::Discovery::Person
-      @wittgenstein_reader.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
+      @bib.author.class.should == WorldCat::Discovery::Person
+      @bib.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
     end
     
     it "should have the right publisher" do
-      @wittgenstein_reader.publisher.class.should == WorldCat::Discovery::Organization
-      @wittgenstein_reader.publisher.name.should == "B. Blackwell"
+      @bib.publisher.class.should == WorldCat::Discovery::Organization
+      @bib.publisher.name.should == "B. Blackwell"
     end
     
     it "should have the right contributors" do
-      @wittgenstein_reader.contributors.size.should == 1
-      contributor = @wittgenstein_reader.contributors.first
+      @bib.contributors.size.should == 1
+      contributor = @bib.contributors.first
       contributor.class.should == WorldCat::Discovery::Person
       contributor.name.should == "Kenny, Anthony, 1931-"
     end
     
     it "should have the right subjects" do
-      subjects = @wittgenstein_reader.subjects
+      subjects = @bib.subjects
       subjects.each {|subject| subject.class.should == WorldCat::Discovery::Subject}
       
       subject_ids = subjects.map {|subject| subject.id}
@@ -83,8 +83,11 @@ describe WorldCat::Discovery::Bib do
       subject_names.should include("Philosophy.")
     end
     
-    it "should have the right work example URIs" do
-      work_example_uris = @wittgenstein_reader.work_example_uris
+    it "should have the right work examples" do
+      work_examples = @bib.work_examples
+      work_examples.each {|product_model| product_model.class.should == WorldCat::Discovery::ProductModel}
+      
+      work_example_uris = work_examples.map {|product_model| product_model.id}
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193623'))
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193616'))
       work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193626'))
@@ -92,7 +95,7 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should have the right places of publication" do
-      places_of_publication = @wittgenstein_reader.places_of_publication
+      places_of_publication = @bib.places_of_publication
       places_of_publication.size.should == 3
       
       oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A2'); p}
@@ -111,12 +114,16 @@ describe WorldCat::Discovery::Bib do
     end
     
     it "should have the right descriptions" do
-      descriptions = @wittgenstein_reader.descriptions
+      descriptions = @bib.descriptions
       descriptions.size.should == 2
       
       File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/30780581_descriptions.txt").each do |line|
         descriptions.should include(line.chomp)
       end
+    end
+    
+    it "should have the right isbns" do
+      @bib.isbns.sort.should == ['0631193618', '0631193626', '9780631193616', '9780631193623']
     end
     
     it "should have the right book edition" do
