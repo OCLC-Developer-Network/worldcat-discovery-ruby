@@ -41,7 +41,9 @@ module WorldCat
         self.work_examples.map {|product_model| product_model.isbn}.sort
       end
       
-      def self.search(wskey, params)
+      def self.search(params)
+        # Retrieve the key from the singleton configuration object
+        wskey = WorldCat::Discovery.api_key
         
         # Make the HTTP request for the data
         url = "#{Bib.production_url}/search?q=#{CGI.escape(params[:q])}"
@@ -61,7 +63,10 @@ module WorldCat
         search_results
       end
             
-      def self.find(oclc_number, wskey)
+      def self.find(oclc_number)
+        # Retrieve the key from the singleton configuration object
+        wskey = WorldCat::Discovery.api_key
+        raise ConfigurationException.new if wskey.nil?
         
         # Make the HTTP Request for the data
         url = "#{Bib.production_url}/data/#{oclc_number}"

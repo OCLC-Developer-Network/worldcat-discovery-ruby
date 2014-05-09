@@ -5,6 +5,7 @@ require "oclc/auth"
 require 'rest_client'
 require "spira"
 
+require "worldcat/discovery/configuration"
 require "worldcat/discovery/version"
 require "worldcat/discovery/uris"
 require "worldcat/discovery/generic_resource"
@@ -22,6 +23,17 @@ require "worldcat/discovery/facet_value"
 
 module WorldCat
   module Discovery
-
+    
+    class << self
+      def configure(api_key)
+        @config = WorldCat::Discovery::Configuration.instance
+        @config.api_key = api_key
+      end
+      
+      def api_key
+        @config.api_key
+      end 
+    end
+    
   end
 end
