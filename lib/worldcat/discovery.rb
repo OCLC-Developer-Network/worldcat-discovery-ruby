@@ -4,8 +4,7 @@ require "rdf/rdfxml"
 require "oclc/auth"
 require 'rest_client'
 require "spira"
-require "active_support"
-require "active_support/core_ext/hash" # used for the to_params
+require "addressable/uri"
 
 require "worldcat/discovery/configuration"
 require "worldcat/discovery/version"

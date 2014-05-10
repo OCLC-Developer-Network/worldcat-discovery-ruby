@@ -46,13 +46,10 @@ module WorldCat
         wskey = WorldCat::Discovery.api_key
         
         # Make the HTTP request for the data
-        url = "#{Bib.production_url}/search?#{params.to_query}"
-        if params[:facets]
-          facet_params = params[:facets].map {|facet| "facets=#{CGI.escape(facet)}"}.join("&")
-          url += "&#{facet_params}"
-        end
-        auth = wskey.hmac_signature('GET', url)
-        resource = RestClient::Resource.new url
+        uri = Addressable::URI.parse("#{Bib.production_url}/search")
+        uri.query_values = params
+        auth = wskey.hmac_signature('GET', uri.to_s)
+        resource = RestClient::Resource.new uri.to_s
         response = resource.get(:authorization => auth, :accept => 'application/rdf+xml')
         
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
