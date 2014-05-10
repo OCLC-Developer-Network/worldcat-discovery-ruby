@@ -182,102 +182,115 @@ describe WorldCat::Discovery::Bib do
     end
 
     context "when searching for bib resources" do
-      before(:all) do
-        url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10&facets=inLanguage:10'
-        stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
-
-        wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-        @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
-      end
-
-      it "should return a results set" do
-        @results.class.should == WorldCat::Discovery::SearchResults
-      end
-
-      it "should contain the right id" do
-        uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
-        @results.id.should == uri
-      end
-
-      it "should have the right number for total results" do
-        @results.total_results.should == 1120
-      end
-
-      it "should have the right start index" do
-        @results.start_index.should == 0
-      end
-
-      it "should have the right items per page" do
-        @results.items_per_page.should == 10
-      end
-
-      it "should have the right number of items" do
-        @results.items.size.should == 10
-      end
-
-      it "should have the right kind of items" do
-        @results.items.each {|item| item.class.should == WorldCat::Discovery::GenericResource}
-      end
-
-      it "should have respond to a request for its items as bibs" do
-        @results.bibs.size.should == 10
-        @results.bibs.each {|item| item.class.should == WorldCat::Discovery::Bib}
-      end
-
-      it "should return the bibs in sorted order" do
-        0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
-      end
-
-      context "when asking for facets" do
+      context "when retrieving the first page of results" do
         before(:all) do
-          @base_url = 'http://beta.worldcat.org/discovery/bib/search?facets=author:10&' +
-              'facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10&facets=inLanguage:10'
+          stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
+          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
         end
 
-        it "should have a facet list with the right ID" do
-          @results.facet_list.id.to_s.should == "#{@base_url}#facets"
+        it "should return a results set" do
+          @results.class.should == WorldCat::Discovery::SearchResults
         end
 
-        it "should have the correct number of facets" do
-          @results.facets.size.should == 2
+        it "should contain the right id" do
+          uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+          @results.id.should == uri
         end
 
-        it "should have the correct facet indices" do
-          facet_indices = @results.facets.map{|facet| facet.index}
-          facet_indices.should include('srw.ap')
-          facet_indices.should include('srw.ln')
+        it "should have the right number for total results" do
+          @results.total_results.should == 1120
         end
 
-        it "should have facets with the correct IDs" do
-          ids = @results.facets.map{|facet| facet.id.to_s}
-          ids.should include("#{@base_url}#facet:srw.ln")
-          ids.should include("#{@base_url}#facet:srw.ap")
+        it "should have the right start index" do
+          @results.start_index.should == 0
         end
 
-        it "should have facet values with the correct IDs" do
-          @results.facets.each do |facet|
-            value_ids = facet.values.map{|value| value.id.to_s}
-            0.upto(9) do |i|
-              value_ids.should include("#{@base_url}#facet:#{facet.index}:#{i}")
+        it "should have the right items per page" do
+          @results.items_per_page.should == 10
+        end
+
+        it "should have the right number of items" do
+          @results.items.size.should == 10
+        end
+
+        it "should have the right kind of items" do
+          @results.items.each {|item| item.class.should == WorldCat::Discovery::GenericResource}
+        end
+
+        it "should have respond to a request for its items as bibs" do
+          @results.bibs.size.should == 10
+          @results.bibs.each {|item| item.class.should == WorldCat::Discovery::Bib}
+        end
+
+        it "should return the bibs in sorted order" do
+          0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
+        end
+
+        context "when asking for facets" do
+          before(:all) do
+            @base_url = 'http://beta.worldcat.org/discovery/bib/search?facets=author:10&' +
+                'facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
+          end
+
+          it "should have a facet list with the right ID" do
+            @results.facet_list.id.to_s.should == "#{@base_url}#facets"
+          end
+
+          it "should have the correct number of facets" do
+            @results.facets.size.should == 2
+          end
+
+          it "should have the correct facet indices" do
+            facet_indices = @results.facets.map{|facet| facet.index}
+            facet_indices.should include('srw.ap')
+            facet_indices.should include('srw.ln')
+          end
+
+          it "should have facets with the correct IDs" do
+            ids = @results.facets.map{|facet| facet.id.to_s}
+            ids.should include("#{@base_url}#facet:srw.ln")
+            ids.should include("#{@base_url}#facet:srw.ap")
+          end
+
+          it "should have facet values with the correct IDs" do
+            @results.facets.each do |facet|
+              value_ids = facet.values.map{|value| value.id.to_s}
+              0.upto(9) do |i|
+                value_ids.should include("#{@base_url}#facet:#{facet.index}:#{i}")
+              end
+            end
+          end      
+
+          it "should sort the facet values high to low" do
+            # @results.facets.first.values.first.count.should > @results.facets.first.values.last.count
+            last_count = nil
+            @results.facets.first.values.each do |facet_value|
+              if last_count != nil
+                facet_value.count.should <= last_count
+              end
+              last_count = facet_value.count
             end
           end
-        end      
 
-        it "should sort the facet values high to low" do
-          # @results.facets.first.values.first.count.should > @results.facets.first.values.last.count
-          last_count = nil
-          @results.facets.first.values.each do |facet_value|
-            if last_count != nil
-              facet_value.count.should <= last_count
-            end
-            last_count = facet_value.count
+          it "should have the correct facet value name" do
+            author_facet = @results.facets.find {|facet| facet if facet.index == 'srw.ap'}
+            author_facet.values.first.name.should.should == 'thomas gary'
           end
+        end        
+      end
+      
+      context "when paging for the second list of results" do 
+        before(:all) do
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&startNum=10'
+          stub_request(:get, url).to_return(:body => body_content("bib_search_page_two.rdf"), :status => 200)
+          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :startNum => 10)
         end
 
-        it "should have the correct facet value name" do
-          author_facet = @results.facets.find {|facet| facet if facet.index == 'srw.ap'}
-          author_facet.values.first.name.should.should == 'thomas gary'
+        it "should have the right start index" do
+          @results.start_index.should == 10
         end
+        
       end
     end
   end

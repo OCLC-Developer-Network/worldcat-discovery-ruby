@@ -46,7 +46,7 @@ module WorldCat
         wskey = WorldCat::Discovery.api_key
         
         # Make the HTTP request for the data
-        url = "#{Bib.production_url}/search?q=#{CGI.escape(params[:q])}"
+        url = "#{Bib.production_url}/search?#{params.to_query}"
         if params[:facets]
           facet_params = params[:facets].map {|facet| "facets=#{CGI.escape(facet)}"}.join("&")
           url += "&#{facet_params}"
