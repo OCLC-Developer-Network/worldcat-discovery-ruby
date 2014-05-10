@@ -1,36 +1,12 @@
-<<<<<< HEAD
 # Worldcat::Discovery
 
-TODO: Write a gem description
+Ruby gem wrapper around WorldCat Discovery API
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'worldcat-discovery'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install worldcat-discovery
+TODO: Write installation instructions here
 
 ## Usage
 
 TODO: Write usage instructions here
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-=======
-worldcat-discovery
-==================
-
-Ruby gem wrapper around WorldCat Discovery API
->>>>>>> c2acb6661129a6d5c24e0bd3185397bf6f91de43
