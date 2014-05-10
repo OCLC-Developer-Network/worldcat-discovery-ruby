@@ -8,6 +8,8 @@ TODO: Write installation instructions here
 
 ## Usage
 
+### Find a Bibliographic Resource in WorldCat
+
 ```ruby
 require 'worldcat/discovery'
 
@@ -26,4 +28,20 @@ bib.author.name  # => "Thomas, David."
 bib.contributors.map{|contributor| contributor.name} # => [" Fowler, Chad.", "Hunt, Andrew."]
 ```
 
+### Search for Bibliographic Resources in WorldCat
 
+```ruby
+require 'worldcat/discovery'
+
+wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+WorldCat::Discovery.configure(wskey)
+
+params = Hash.new
+params[:q] = 'programming ruby'
+params[:facets] = ['author:10', 'inLanguage:10']
+params[:startNum] = 0
+results = WorldCat::Discovery::Bib.search(params)
+
+results.bibs.map {|bib| str = bib.name; str += " (#{bib.date_published})" if bib.date_published; str}
+# => ["Programming Ruby. (2008)", "Programming Ruby : the pragmatic programmers' guide (2005)", "The Ruby programming language (2008)", ... ]
+```
