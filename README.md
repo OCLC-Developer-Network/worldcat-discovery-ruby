@@ -4,7 +4,12 @@ Ruby gem wrapper around WorldCat Discovery API.
 
 ## Installation
 
-TODO: Write installation instructions here
+```bash
+$ git clone https://github.com/OCLC-Developer-Network/worldcat-discovery-ruby.git
+$ cd worldcat-discovery-ruby
+$ gem build worldcat-discovery.gemspec
+$ gem install worldcat-discovery-<VERSION-NUMBER>.gem
+```
 
 ## Usage
 
