@@ -21,6 +21,7 @@ require "spira"
 require "addressable/uri"
 
 require "worldcat/discovery/configuration"
+require "worldcat/discovery/configuration_exception"
 require "worldcat/discovery/version"
 require "worldcat/discovery/uris"
 require "worldcat/discovery/generic_resource"
@@ -40,6 +41,7 @@ module WorldCat
   module Discovery
     
     class << self
+      
       def configure(api_key)
         @config = WorldCat::Discovery::Configuration.instance
         @config.api_key = api_key
@@ -48,7 +50,11 @@ module WorldCat
       def api_key
         @config.api_key
       end 
+      
+      def configured?
+        WorldCat::Discovery::Configuration.instance.api_key.nil? ? false : true
+      end
+      
     end
-    
   end
 end

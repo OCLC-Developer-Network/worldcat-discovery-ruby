@@ -57,6 +57,7 @@ module WorldCat
       
       def self.search(params)
         # Retrieve the key from the singleton configuration object
+        raise ConfigurationException.new unless WorldCat::Discovery.configured?()
         wskey = WorldCat::Discovery.api_key
         
         # Make the HTTP request for the data
@@ -76,8 +77,8 @@ module WorldCat
             
       def self.find(oclc_number)
         # Retrieve the key from the singleton configuration object
+        raise ConfigurationException.new unless WorldCat::Discovery.configured?()
         wskey = WorldCat::Discovery.api_key
-        raise ConfigurationException.new if wskey.nil?
         
         # Make the HTTP Request for the data
         url = "#{Bib.production_url}/data/#{oclc_number}"

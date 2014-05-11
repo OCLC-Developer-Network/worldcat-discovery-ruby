@@ -22,13 +22,17 @@ describe WorldCat::Discovery::Bib do
     it "should raise an error when calling the find() method on the Bib class" do
       url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
       stub_request(:get, url).to_return(:body => body_content("30780581.rdf"), :status => 200)
-      lambda { bib = WorldCat::Discovery::Bib.find(30780581) }.should raise_error
+      lambda { bib = WorldCat::Discovery::Bib.find(30780581) }.should raise_error(WorldCat::Discovery::ConfigurationException, 
+          'Cannot find/search Bib resources unless an API key is configured. Call WorldCat::Discovery.configure(wskey) with an OCLC::Auth::WSKey'
+        )
     end
     
     it "should raise an error when calling the find() method on the Bib class" do
       url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader'
       stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
-      lambda { WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader') }.should raise_error
+      lambda { WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader') }.should raise_error(WorldCat::Discovery::ConfigurationException, 
+          'Cannot find/search Bib resources unless an API key is configured. Call WorldCat::Discovery.configure(wskey) with an OCLC::Auth::WSKey'
+        )
     end
   end
   
