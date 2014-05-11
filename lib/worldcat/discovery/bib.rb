@@ -44,6 +44,7 @@ module WorldCat
           author_type = Spira.repository.query(:subject => author_stmt.object, :predicate => RDF.type).first
           case author_type.object
           when SCHEMA_PERSON then author_stmt.object.as(Person)
+          when SCHEMA_ORGANIZATION then author_stmt.object.as(Organization)
           else nil
           end
         else

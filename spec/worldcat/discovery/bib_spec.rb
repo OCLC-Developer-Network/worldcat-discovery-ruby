@@ -188,7 +188,7 @@ describe WorldCat::Discovery::Bib do
       end
     end
 
-    context "when parsing data for oddities" do
+    context "when parsing data for bib resources that don't have personal authors" do
       it "should handle books with no author" do
         url = 'https://beta.worldcat.org/discovery/bib/data/45621749'
         stub_request(:get, url).to_return(:body => body_content("45621749.rdf"), :status => 200)
@@ -196,6 +196,16 @@ describe WorldCat::Discovery::Bib do
         bib = WorldCat::Discovery::Bib.find(45621749)
 
         bib.author.should == nil
+      end
+      
+      it "should handle authors that are organizations" do
+        url = 'https://beta.worldcat.org/discovery/bib/data/233192257'
+        stub_request(:get, url).to_return(:body => body_content("233192257.rdf"), :status => 200)
+        wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+        bib = WorldCat::Discovery::Bib.find(233192257)
+
+        bib.author.class.should == WorldCat::Discovery::Organization
+        bib.author.name.should == "United States. National Park Service."
       end
     end
 

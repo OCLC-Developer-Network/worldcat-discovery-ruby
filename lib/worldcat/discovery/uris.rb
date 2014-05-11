@@ -22,6 +22,7 @@ module WorldCat
     SCHEMA_NAME            = RDF::URI.new('http://schema.org/name')
     SCHEMA_BOOK            = RDF::URI.new('http://schema.org/Book')
     SCHEMA_PERSON          = RDF::URI.new('http://schema.org/Person')
+    SCHEMA_ORGANIZATION    = RDF::URI.new('http://schema.org/Organization')
     SCHEMA_INTANGIBLE      = RDF::URI.new('http://schema.org/Intangible')
     SCHEMA_PRODUCT_MODEL   = RDF::URI.new('http://schema.org/ProductModel')
     SCHEMA_WORK_EXAMPLE    = RDF::URI.new('http://schema.org/workExample')
