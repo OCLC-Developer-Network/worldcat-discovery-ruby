@@ -2,6 +2,9 @@
 
 Ruby gem wrapper around WorldCat Discovery API. 
 
+Please Note: This API is not yet in production and this documentation is only published for our group 
+of alpha release testers for feedback purposes only.
+
 ## Installation
 
 Prior to installing this gem manually as outlined below, you will need to go through the same 
