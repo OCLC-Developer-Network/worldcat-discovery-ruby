@@ -5,7 +5,7 @@ Ruby gem wrapper around WorldCat Discovery API.
 ## Installation
 
 Prior to installing this gem manually as outlined below, you will need to go through the same 
-process for the (OCLC::Auth)[https://github.com/OCLC-Developer-Network/oclc-auth-ruby] gem for the API key dependency.
+process for the [OCLC::Auth](https://github.com/OCLC-Developer-Network/oclc-auth-ruby) gem for the API key dependency.
 
 ```bash
 $ git clone https://github.com/OCLC-Developer-Network/worldcat-discovery-ruby.git
