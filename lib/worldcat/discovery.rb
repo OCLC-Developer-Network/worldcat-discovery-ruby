@@ -36,6 +36,7 @@ require "worldcat/discovery/review"
 require "worldcat/discovery/facet_list"
 require "worldcat/discovery/facet"
 require "worldcat/discovery/facet_value"
+require "worldcat/discovery/offer"
 
 module WorldCat
   module Discovery
