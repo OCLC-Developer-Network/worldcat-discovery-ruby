@@ -40,6 +40,7 @@ module WorldCat
     SCHEMA_SIGNIFICANT_LINK = RDF::URI.new('http://schema.org/significantLink')
     SCHEMA_BOOK_EDITION    = RDF::URI.new('http://schema.org/bookEdition')
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
+    DCTERMS_HAS_PART       = RDF::URI.new('http://purl.org/dc/terms/hasPart')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_PLACE_OF_PUB       = RDF::URI.new('http://purl.org/library/placeOfPublication')
     DISCOVERY_TOTAL_RESULTS  = RDF::URI.new('http://worldcat.org/searcho/totalResults')
@@ -50,7 +51,9 @@ module WorldCat
     DISCOVERY_FACET_INDEX    = RDF::URI.new('http://worldcat.org/searcho/facetIndex')
     DISCOVERY_FACET_COUNT    = RDF::URI.new('http://worldcat.org/searcho/count')
     DISCOVERY_FACET_VALUE    = RDF::URI.new('http://worldcat.org/searcho/facetValue')
+    DISCOVERY_SEARCH_RESULTS = RDF::URI.new('http://worldcat.org/vocab/discovery/SearchResults')
     GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
+    GOOD_RELATIONS_POSITION2 = RDF::URI.new('http://purl.org/goodrelations/v1/displayPosition')
     
   end
 end

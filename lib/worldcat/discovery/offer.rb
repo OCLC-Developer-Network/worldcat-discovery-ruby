@@ -14,8 +14,10 @@
 
 module WorldCat
   module Discovery
-    class Offer
+    class Offer < Spira::Base
       
+      property :display_position, :predicate => GOOD_RELATIONS_POSITION2, :type => XSD.integer
+
       # call-seq:
       #   find_by_oclc(oclc_number, params = nil) => WorldCat::Discovery::SearchResults
       # 
@@ -27,13 +29,13 @@ module WorldCat
       # 
       # [:tbd] TBD
       def self.find_by_oclc(oclc_number, params = nil)
-        uri = Addressable::URI.parse("#{Offer.production_url}/#{oclc_number}")
+        uri = Addressable::URI.parse("#{Offer.production_url}/oclc/#{oclc_number}")
         uri.query_values = params
         response = get_data(uri.to_s)
         
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
         Spira.repository = RDF::Repository.new.from_rdfxml(response)
-        search_results = Spira.repository.query(:predicate => RDF.type, :object => SCHEMA_SEARCH_RES_PAGE).first.subject.as(SearchResults)
+        search_results = Spira.repository.query(:predicate => RDF.type, :object => DISCOVERY_SEARCH_RESULTS).first.subject.as(OfferSearchResults)
         
         # WorldCat::Discovery::SearchResults.new
         search_results

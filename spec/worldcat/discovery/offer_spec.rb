@@ -30,7 +30,13 @@ describe WorldCat::Discovery::Offer do
       end
     
       it "should return a result set of Offers" do
+        @results.offers.size.should == 10
         @results.offers.each {|offer| offer.class.should == WorldCat::Discovery::Offer}
+      end
+      
+      it "should return the Offers in the correct order" do
+        i = 1
+        @results.offers.each {|offer| offer.display_position.should == i; i += 1}
       end
     end
     

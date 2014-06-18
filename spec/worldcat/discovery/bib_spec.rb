@@ -220,7 +220,7 @@ describe WorldCat::Discovery::Bib do
         end
 
         it "should return a results set" do
-          @results.class.should == WorldCat::Discovery::SearchResults
+          @results.class.should == WorldCat::Discovery::BibSearchResults
         end
 
         it "should contain the right id" do
