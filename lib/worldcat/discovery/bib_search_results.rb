@@ -14,8 +14,16 @@
 
 module WorldCat
   module Discovery
+    
+    # == Properties mapped from RDF data
+    #
+    # RDF properties are mapped via an ORM style mapping.
+    # 
+    # [facet_list] RDF predicate: http://worldcat.org/searcho/facetList; returns: WorldCat::Discovery::FacetList
+    
     class BibSearchResults < SearchResults
       
+      property :facet_list, :predicate => DISCOVERY_FACET_LIST, :type => 'FacetList'
       
       # call-seq:
       #   bibs() => Array of WorldCat::Discovery::Bib objects

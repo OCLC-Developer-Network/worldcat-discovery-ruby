@@ -219,7 +219,7 @@ describe WorldCat::Discovery::Bib do
           @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
         end
 
-        it "should return a results set" do
+        it "should return a bib results set" do
           @results.class.should == WorldCat::Discovery::BibSearchResults
         end
 
@@ -248,13 +248,13 @@ describe WorldCat::Discovery::Bib do
           @results.items.each {|item| item.class.should == WorldCat::Discovery::GenericResource}
         end
 
-        it "should have respond to a request for its items as bibs" do
+        it "should respond to a request for its items as bibs" do
           @results.bibs.size.should == 10
           @results.bibs.each {|item| item.class.should == WorldCat::Discovery::Bib}
         end
 
         it "should return the bibs in sorted order" do
-          0.upto(0) {|i| @results.bibs[i].display_position.should == i+1}
+          0.upto(9) {|i| @results.bibs[i].display_position.should == i+1}
         end
 
         context "when asking for facets" do

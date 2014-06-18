@@ -17,6 +17,9 @@ module WorldCat
     class OfferSearchResults < SearchResults
       
       has_many :items, :predicate => DCTERMS_HAS_PART, :type => 'Offer'
+      property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS2, :type => XSD.integer
+      property :start_index, :predicate => DISCOVERY_START_INDEX2, :type => XSD.integer
+      property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE2, :type => XSD.integer
       
       # call-seq:
       #   offers() => Array of WorldCat::Discovery::Offer objects
@@ -24,8 +27,6 @@ module WorldCat
       # Returns Offer objects contained in the SearchResults. 
       # Results will be sorted by display position.
       def offers
-        # offers = self.items.map {|item| item.about}
-        
         # Create a Hash in which the keys are the display position and the values are the corresponding Bib objects
         indexed_offers = self.items.reduce(Hash.new) {|sorted_offers, offer| sorted_offers[offer.display_position] = offer; sorted_offers}
 

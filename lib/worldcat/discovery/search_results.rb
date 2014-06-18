@@ -28,7 +28,6 @@ module WorldCat
       property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS, :type => XSD.integer
       property :start_index, :predicate => DISCOVERY_START_INDEX, :type => XSD.integer
       property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE, :type => XSD.integer
-      property :facet_list, :predicate => DISCOVERY_FACET_LIST, :type => 'FacetList'
       has_many :items, :predicate => SCHEMA_SIGNIFICANT_LINK, :type => 'GenericResource'
       
       # call-seq:
