@@ -69,6 +69,8 @@ describe WorldCat::Discovery::Offer do
       before(:all) do
         @offer = @results.offers.first
         @item_offered = @offer.item_offered
+        @collection = @item_offered.collection
+        @library = @collection.library
       end
       
       it "should have the correct type" do
@@ -81,11 +83,24 @@ describe WorldCat::Discovery::Offer do
       
       it "should have the correct item offered" do
         @item_offered.subject.should == RDF::Node.new("A0")
+        @item_offered.type.should == RDF::URI.new('http://schema.org/SomeProducts')
+        @item_offered.bib.subject.should == RDF::URI.new('http://www.worldcat.org/oclc/30780581')
+        @item_offered.bib.name.should == 'The Wittgenstein reader'
       end
 
-      it "should have an item offered with the correct type" do
-        @item_offered.type.should == RDF::URI.new('http://schema.org/SomeProducts')
+      it "should belong to the correct collection" do
+        @collection.type.should == RDF::URI.new('http://purl.org/dc/terms/Collection')
+        @collection.oclc_symbol.should == 'AIZ'
       end
+
+      it "should be managed by the correct library" do
+        @library.id.should == 'http://worldcat.org/wcr/organization/resource/72545'
+        @library.type.should == RDF::URI.new('http://schema.org/Library')
+        @library.name.should == 'ACADEMIA SINICA INST EUROPEAN AM STUDIES'
+        @library.collection.should == @collection
+      end
+      
+      
     end
   end
   

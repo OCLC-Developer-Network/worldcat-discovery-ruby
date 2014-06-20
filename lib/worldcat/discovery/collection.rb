@@ -19,11 +19,11 @@ module WorldCat
     #
     # RDF properties are mapped via an ORM style mapping.
     # 
-    class SomeProducts < Spira::Base
+    class Collection < Spira::Base
       
       property :type, :predicate => RDF.type, :type => RDF::URI
-      property :collection, :predicate => DCTERMS_IS_PART_OF, :type => 'Collection'
-      property :bib, :predicate => SCHEMA_MODEL, :type => 'Bib'
+      property :oclc_symbol, :predicate => LIB_OCLC_SYMBOL, :type => XSD.string
+      property :library, :predicate => WCR_MANAGED_BY, :type => 'Library'
       
       # call-seq:
       #   id() => RDF::URI

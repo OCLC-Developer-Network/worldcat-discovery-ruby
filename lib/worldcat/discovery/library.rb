@@ -19,20 +19,20 @@ module WorldCat
     #
     # RDF properties are mapped via an ORM style mapping.
     # 
-    class SomeProducts < Spira::Base
+    # [type] RDF predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type; returns: RDF::URI
+    # [name] RDF predicate: http://schema.org/name; returns: String
+    
+    class Library < Organization
       
-      property :type, :predicate => RDF.type, :type => RDF::URI
-      property :collection, :predicate => DCTERMS_IS_PART_OF, :type => 'Collection'
-      property :bib, :predicate => SCHEMA_MODEL, :type => 'Bib'
+      property :collection, :predicate => LIB_MANAGES, :type => 'Collection'
       
       # call-seq:
       #   id() => RDF::URI
       # 
-      # Will return the RDF::URI object that serves as the RDF subject of the current ProductModel
+      # Will return the RDF::URI object that serves as the RDF subject of the current Organization
       def id
         self.subject
       end
-      
     end
   end
 end
