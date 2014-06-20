@@ -39,6 +39,8 @@ module WorldCat
     SCHEMA_SEARCH_RES_PAGE = RDF::URI.new('http://schema.org/SearchResultsPage')
     SCHEMA_SIGNIFICANT_LINK = RDF::URI.new('http://schema.org/significantLink')
     SCHEMA_BOOK_EDITION    = RDF::URI.new('http://schema.org/bookEdition')
+    SCHEMA_ITEM_OFFERED    = RDF::URI.new('http://schema.org/itemOffered')
+    SCHEMA_SOME_PRODUCTS   = RDF::URI.new('http://schema.org/SomeProducts')
     OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
     DCTERMS_HAS_PART       = RDF::URI.new('http://purl.org/dc/terms/hasPart')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')

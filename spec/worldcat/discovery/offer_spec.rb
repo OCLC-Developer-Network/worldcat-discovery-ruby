@@ -66,7 +66,26 @@ describe WorldCat::Discovery::Offer do
     end
     
     context "when looking at the first offer" do
+      before(:all) do
+        @offer = @results.offers.first
+        @item_offered = @offer.item_offered
+      end
       
+      it "should have the correct type" do
+        @offer.type.should == RDF::URI.new('http://schema.org/Offer')
+      end
+      
+      it "should have the correct display position" do
+        @offer.display_position.should == 1
+      end
+      
+      it "should have the correct item offered" do
+        @item_offered.subject.should == RDF::Node.new("A0")
+      end
+
+      it "should have an item offered with the correct type" do
+        @item_offered.type.should == RDF::URI.new('http://schema.org/SomeProducts')
+      end
     end
   end
   
