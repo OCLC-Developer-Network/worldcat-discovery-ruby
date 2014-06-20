@@ -16,7 +16,7 @@ module WorldCat
   module Discovery
     class Offer < Spira::Base
       
-      property :display_position, :predicate => GOOD_RELATIONS_POSITION2, :type => XSD.integer
+      property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
       property :type, :predicate => RDF.type, :type => RDF::URI
       property :item_offered, :predicate => SCHEMA_ITEM_OFFERED, :type => 'SomeProducts'
 

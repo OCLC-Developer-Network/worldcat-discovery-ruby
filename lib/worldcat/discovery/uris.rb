@@ -65,7 +65,6 @@ module WorldCat
     DISCOVERY_FACET_VALUE    = RDF::URI.new('http://worldcat.org/searcho/facetValue')
     DISCOVERY_SEARCH_RESULTS = RDF::URI.new('http://worldcat.org/vocab/discovery/SearchResults')
     GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
-    GOOD_RELATIONS_POSITION2 = RDF::URI.new('http://purl.org/goodrelations/v1/displayPosition')
     
   end
 end

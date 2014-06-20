@@ -31,7 +31,7 @@ describe WorldCat::Discovery::Offer do
     end
 
     it "should contain the right id" do
-      uri = RDF::URI("http://finddev07.dev.oclc.org:29050/firefly-service/rs/sru/worldcat-plus?x-info-5-frbrGrouping=on&operation=searchRetrieve&startRecord=0&clientip=132.174.253.29&query=srw.no%3D30780581&maximumRecords=10&resultSetTTL=300&recordSchema=http%3A%2F%2Fworldcat.org%2Fvocab%2Fdiscovery%2FOfferSet&x-info-5-retainAttributes=1&version=1.1")
+      uri = RDF::URI("http://132.174.253.29:8080/discovery/offer/oclc/30780581?itemsPerPage=10&startNum=0")
       @results.id.should == uri
     end
     
@@ -43,7 +43,7 @@ describe WorldCat::Discovery::Offer do
       @results.items.each {|offer| offer.class.should == WorldCat::Discovery::Offer}
     end
     
-    it "should have respond to a request for its items as bibs" do
+    it "should respond to a request for its items as offers" do
       @results.offers.size.should == 10
       @results.offers.each {|item| item.class.should == WorldCat::Discovery::Offer}
     end
