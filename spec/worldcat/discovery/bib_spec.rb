@@ -214,9 +214,9 @@ describe WorldCat::Discovery::Bib do
     context "when searching for bib resources" do
       context "when retrieving the first page of results" do
         before(:all) do
-          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10&facets=inLanguage:10'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facetFields=author:10&facetFields=inLanguage:10'
           stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
-          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
+          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facetFields => ['author:10', 'inLanguage:10'])
         end
 
         it "should return a results set" do
@@ -224,12 +224,12 @@ describe WorldCat::Discovery::Bib do
         end
 
         it "should contain the right id" do
-          uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+          uri = RDF::URI("https://beta.worldcat.org/discovery/bib/search?facetFields=author:10&facetFields=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
           @results.id.should == uri
         end
 
         it "should have the right number for total results" do
-          @results.total_results.should == 1130
+          @results.total_results.should == 779
         end
 
         it "should have the right start index" do
@@ -259,8 +259,8 @@ describe WorldCat::Discovery::Bib do
 
         context "when asking for facets" do
           before(:all) do
-            @base_url = 'http://beta.worldcat.org/discovery/bib/search?facets=author:10&' +
-                'facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
+            @base_url = 'http://beta.worldcat.org/discovery/bib/search?facetFields=author:10&' +
+                'facetFields=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
           end
 
           it "should have a facet list with the right ID" do

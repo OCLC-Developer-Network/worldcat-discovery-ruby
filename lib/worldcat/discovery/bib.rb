@@ -107,7 +107,7 @@ module WorldCat
       # Parameters
       # 
       # [:q] the primary query required to conduct a search of WorldCat
-      # [:facets] an array of facets to be returned. Facets should be specified as +facet_name:num_facets+
+      # [:facetFields] an array of facets to be returned. Facets should be specified as +facet_name:num_facets+
       # [:startNum] the integer offset from the begining of the search result set. defaults to 0
       def self.search(params)
         uri = Addressable::URI.parse("#{Bib.production_url}/search")
@@ -116,7 +116,7 @@ module WorldCat
         
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
         Spira.repository = RDF::Repository.new.from_rdfxml(response)
-        search_results = Spira.repository.query(:predicate => RDF.type, :object => SCHEMA_SEARCH_RES_PAGE).first.subject.as(SearchResults)
+        search_results = Spira.repository.query(:predicate => RDF.type, :object => DISCOVERY_SEARCH_RESULTS).first.subject.as(SearchResults)
         
         # WorldCat::Discovery::SearchResults.new
         search_results
