@@ -45,7 +45,6 @@ module WorldCat
     DISCOVERY_TOTAL_RESULTS  = RDF::URI.new('http://worldcat.org/vocab/discovery/totalResults')
     DISCOVERY_ITEMS_PER_PAGE = RDF::URI.new('http://worldcat.org/vocab/discovery/itemsPerPage')
     DISCOVERY_START_INDEX    = RDF::URI.new('http://worldcat.org/vocab/discovery/startIndex')
-    DISCOVERY_FACET_LIST     = RDF::URI.new('http://worldcat.org/vocab/discovery/facetList')
     DISCOVERY_FACET          = RDF::URI.new('http://worldcat.org/vocab/discovery/facet')
     DISCOVERY_FACET_INDEX    = RDF::URI.new('http://worldcat.org/vocab/discovery/facetIndex')
     DISCOVERY_FACET_COUNT    = RDF::URI.new('http://worldcat.org/vocab/discovery/count')

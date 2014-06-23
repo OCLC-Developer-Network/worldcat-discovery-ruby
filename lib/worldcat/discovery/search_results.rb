@@ -19,16 +19,15 @@ module WorldCat
     #
     # RDF properties are mapped via an ORM style mapping.
     # 
-    # [total_results] RDF predicate: http://worldcat.org/searcho/totalResults; returns: Integer
-    # [start_index] RDF predicate: http://worldcat.org/searcho/startIndex; returns: Integer
-    # [items_per_page] RDF predicate: http://worldcat.org/searcho/itemsPerPage; returns: Integer
+    # [total_results] RDF predicate: http://worldcat.org/vocab/discovery/totalResults; returns: Integer
+    # [start_index] RDF predicate: http://worldcat.org/vocab/discovery/startIndex; returns: Integer
+    # [items_per_page] RDF predicate: http://worldcat.org/vocab/discovery/itemsPerPage; returns: Integer
 
     class SearchResults < Spira::Base
       
       property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS, :type => XSD.integer
       property :start_index, :predicate => DISCOVERY_START_INDEX, :type => XSD.integer
       property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE, :type => XSD.integer
-      has_many :items, :predicate => DC_TERMS_HAS_PART, :type => 'GenericResource'
       
       # call-seq:
       #   id() => RDF::URI

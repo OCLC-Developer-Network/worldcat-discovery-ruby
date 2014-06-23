@@ -262,10 +262,6 @@ describe WorldCat::Discovery::Bib do
             @base_url = 'http://oclc.org/searchRetrieveResponse'
           end
 
-          # it "should have a facet list with the right ID" do
-          #   @results.facet_list.id.to_s.should == "#{@base_url}#facets"
-          # end
-
           it "should have the correct number of facets" do
             @results.facets.size.should == 2
           end
