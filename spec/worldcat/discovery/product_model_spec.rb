@@ -20,7 +20,7 @@ describe WorldCat::Discovery::ProductModel do
       rdf = body_content("30780581.rdf")
       Spira.repository = RDF::Repository.new.from_rdfxml(rdf)
       
-      philosophy = RDF::URI.new('http://www.worldcat.org/isbn/9780631193623')
+      philosophy = RDF::URI.new('http://worldcat.org/isbn/9780631193623')
       @product_model = philosophy.as(WorldCat::Discovery::ProductModel)
     end
     
@@ -29,7 +29,7 @@ describe WorldCat::Discovery::ProductModel do
     end
         
     it "should have the right id" do
-      @product_model.id.should == 'http://www.worldcat.org/isbn/9780631193623'
+      @product_model.id.should == 'http://worldcat.org/isbn/9780631193623'
     end
     
     it "should have the right type" do

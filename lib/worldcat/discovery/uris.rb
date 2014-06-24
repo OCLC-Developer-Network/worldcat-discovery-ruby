@@ -20,6 +20,7 @@ module WorldCat
     SCHEMA_ABOUT           = RDF::URI.new('http://schema.org/about')
     SCHEMA_AUTHOR          = RDF::URI.new('http://schema.org/author')
     SCHEMA_CONTRIBUTOR     = RDF::URI.new('http://schema.org/contributor')
+    SCHEMA_CREATOR         = RDF::URI.new('http://schema.org/creator')
     SCHEMA_NAME            = RDF::URI.new('http://schema.org/name')
     SCHEMA_BOOK            = RDF::URI.new('http://schema.org/Book')
     SCHEMA_PERSON          = RDF::URI.new('http://schema.org/Person')

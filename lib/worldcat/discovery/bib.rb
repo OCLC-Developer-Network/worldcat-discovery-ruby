@@ -74,7 +74,9 @@ module WorldCat
       # 
       # Returns Bib author from RDF predicate: http://schema.org/author
       def author
-        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first
+        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_CREATOR).first
+        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first if author_stmt.nil?
+
         if author_stmt
           author_type = Spira.repository.query(:subject => author_stmt.object, :predicate => RDF.type).first
           case author_type.object

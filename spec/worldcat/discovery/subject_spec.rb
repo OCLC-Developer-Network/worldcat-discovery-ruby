@@ -14,7 +14,7 @@
 
 require_relative '../../spec_helper'
 
-describe WorldCat::Discovery::Person do
+describe WorldCat::Discovery::Subject do
   context "when loading an author as a Person resource from RDF data" do
     before(:all) do
       rdf = body_content("30780581.rdf")
@@ -29,7 +29,7 @@ describe WorldCat::Discovery::Person do
     end
     
     it "should have the right name" do
-      @subject.name.should == 'Philosophy.'
+      @subject.name.should == 'Philosophy'
     end
     
     it "should have the right id" do
