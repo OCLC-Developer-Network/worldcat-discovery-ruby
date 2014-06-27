@@ -36,13 +36,17 @@ describe WorldCat::Discovery::Bib do
     end
   end
   
-  context "when trying to find or search for Bib objects before configuring the API key" do
+  context "when loading bibliographic data" do
     before(:all) do
-      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      WorldCat::Discovery.configure(wskey)
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+      WorldCat::Discovery.configure(wskey, 128807, 128807)
+      access_token_request_url = "https://authn.sd00.worldcat.org/oauth2/accessToken?" + 
+          "authenticatingInstitutionId=128807&contextInstitutionId=128807&" + 
+          "grant_type=client_credentials&scope=WorldCatDiscoveryAPI"
+      stub_request(:post, access_token_request_url).to_return(:body => body_content("access_token.json"), :status => 200)
     end
 
-    context "when finding a single resource from the RDF data for The Wittgenstein Reader" do
+    context "from a single resource from the RDF data for The Wittgenstein Reader" do
       before(:all) do
         url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
         stub_request(:get, url).to_return(:body => body_content("30780581.rdf"), :status => 200)
@@ -110,12 +114,9 @@ describe WorldCat::Discovery::Bib do
         subject_ids.should include(RDF::URI('http://dewey.info/class/192/e20/'))
         subject_ids.should include(RDF::URI('http://id.loc.gov/authorities/classification/B3376'))
         subject_ids.should include(RDF::URI('http://id.worldcat.org/fast/1060777'))
-        subject_ids.should include(RDF::Node('A1'))
-        subject_ids.should include(RDF::Node('A2'))
-        subject_ids.should include(RDF::Node('A3'))
-        subject_ids.should include(RDF::Node('A4'))
-        subject_ids.should include(RDF::Node('A5'))
-        subject_ids.should include(RDF::Node('A6'))
+        subject_ids.should include(RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Topic/filosofia_contemporanea_alemanha'))
+        subject_ids.should include(RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Topic/wissenschaftstheorie'))
+        subject_ids.should include(RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Topic/analytische_philosophie'))
 
         subject_names = subjects.map {|subject| subject.name}
         subject_names.should include("Filosofia contemporânea--Alemanha.")
@@ -129,29 +130,36 @@ describe WorldCat::Discovery::Bib do
         work_examples.each {|product_model| product_model.class.should == WorldCat::Discovery::ProductModel}
 
         work_example_uris = work_examples.map {|product_model| product_model.id}
-        work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193623'))
-        work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/9780631193616'))
-        work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193626'))
-        work_example_uris.should include(RDF::URI('http://www.worldcat.org/isbn/0631193618'))
+        work_example_uris.should include(RDF::URI('http://worldcat.org/isbn/9780631193616'))
+        work_example_uris.should include(RDF::URI('http://worldcat.org/isbn/9780631193623'))
       end
 
       it "should have the right places of publication" do
         places_of_publication = @bib.places_of_publication
         places_of_publication.size.should == 3
 
-        oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A8'); p}
+        oxford = places_of_publication.reduce(nil) do |p, place| 
+          p = place if place.id == RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Place/oxford_uk')
+          p
+        end
+        puts oxford.inspect
         oxford.class.should == WorldCat::Discovery::Place
         oxford.type.should == 'http://schema.org/Place'
         oxford.name.should == 'Oxford, UK'
 
-        oxford = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::Node('A7'); p}
-        oxford.class.should == WorldCat::Discovery::Place
-        oxford.type.should == 'http://schema.org/Place'
-        oxford.name.should == 'Cambridge, Mass., USA'
+        cambridge = places_of_publication.reduce(nil) do |p, place|
+          if place.id == RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Place/cambridge_mass_usa')
+            p = place 
+          end
+          p
+        end
+        cambridge.class.should == WorldCat::Discovery::Place
+        cambridge.type.should == 'http://schema.org/Place'
+        cambridge.name.should == 'Cambridge, Mass., USA'
 
         england = places_of_publication.reduce(nil) {|p, place| p = place if place.id == RDF::URI('http://id.loc.gov/vocabulary/countries/enk'); p}
         england.class.should == WorldCat::Discovery::Place
-        england.type.should == 'http://schema.org/Country'      
+        england.type.should == 'http://schema.org/Place'      
       end
 
       it "should have the right descriptions" do
@@ -164,11 +172,11 @@ describe WorldCat::Discovery::Bib do
       end
 
       it "should have the right isbns" do
-        @bib.isbns.sort.should == ['0631193618', '0631193626', '9780631193616', '9780631193623']
+        @bib.isbns.sort.should == ['9780631193616', '9780631193623']
       end
     end
 
-    context "when finding a single resource from the RDF data for The Big Typescript" do
+    context "from a single resource from the RDF data for The Big Typescript" do
       before(:all) do
         url = 'https://beta.worldcat.org/discovery/bib/data/57422379'
         stub_request(:get, url).to_return(:body => body_content("57422379.rdf"), :status => 200)
@@ -190,11 +198,11 @@ describe WorldCat::Discovery::Bib do
       end
     end
 
-    context "when parsing data for bib resources that don't have personal authors" do
+    context "from data for bib resources that don't have personal authors" do
       it "should handle books with no author" do
         url = 'https://beta.worldcat.org/discovery/bib/data/45621749'
         stub_request(:get, url).to_return(:body => body_content("45621749.rdf"), :status => 200)
-        wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+        wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
         bib = WorldCat::Discovery::Bib.find(45621749)
 
         bib.author.should == nil
@@ -203,20 +211,32 @@ describe WorldCat::Discovery::Bib do
       it "should handle authors that are organizations" do
         url = 'https://beta.worldcat.org/discovery/bib/data/233192257'
         stub_request(:get, url).to_return(:body => body_content("233192257.rdf"), :status => 200)
-        wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+        # wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
         bib = WorldCat::Discovery::Bib.find(233192257)
 
         bib.author.class.should == WorldCat::Discovery::Organization
         bib.author.name.should == "United States. National Park Service."
       end
     end
+    
+    context "from data that uses the schema:author property" do
+      it "should have the correct author data" do
+        url = 'https://beta.worldcat.org/discovery/bib/data/30780581'
+        stub_request(:get, url).to_return(:body => body_content("30780581-v1.rdf"), :status => 200)
+        # wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
+        bib = WorldCat::Discovery::Bib.find(30780581)
 
-    context "when searching for bib resources" do
+        bib.author.class.should == WorldCat::Discovery::Person
+        bib.author.name.should == "Wittgenstein, Ludwig, 1889-1951."
+      end
+    end
+
+    context "from searching for bib resources" do
       context "when retrieving the first page of results" do
         before(:all) do
-          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facets=author:10&facets=inLanguage:10'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facetFields=author:10&facetFields=inLanguage:10'
           stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
-          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facets => ['author:10', 'inLanguage:10'])
+          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facetFields => ['author:10', 'inLanguage:10'])
         end
 
         it "should return a bib results set" do
@@ -224,12 +244,12 @@ describe WorldCat::Discovery::Bib do
         end
 
         it "should contain the right id" do
-          uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?facets=author:10&facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+          uri = RDF::URI("https://beta.worldcat.org/discovery/bib/search?facetFields=author:10&facetFields=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
           @results.id.should == uri
         end
 
         it "should have the right number for total results" do
-          @results.total_results.should == 1130
+          @results.total_results.should == 779
         end
 
         it "should have the right start index" do
@@ -259,12 +279,7 @@ describe WorldCat::Discovery::Bib do
 
         context "when asking for facets" do
           before(:all) do
-            @base_url = 'http://beta.worldcat.org/discovery/bib/search?facets=author:10&' +
-                'facets=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0'
-          end
-
-          it "should have a facet list with the right ID" do
-            @results.facet_list.id.to_s.should == "#{@base_url}#facets"
+            @base_url = 'http://oclc.org/searchRetrieveResponse'
           end
 
           it "should have the correct number of facets" do

@@ -20,7 +20,7 @@ module WorldCat
     # RDF properties are mapped via an ORM style mapping.
     # 
     # [type] RDF predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type; returns: RDF::URI
-    # [index] RDF predicate: http://worldcat.org/searcho/facetIndex (index corresponding to current facet); returns: String
+    # [index] RDF predicate: http://worldcat.org/vocab/discovery/facetIndex (index corresponding to current facet); returns: String
     
     class Facet < Spira::Base
       

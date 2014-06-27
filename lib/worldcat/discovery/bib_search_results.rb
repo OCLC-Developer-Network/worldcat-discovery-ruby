@@ -19,11 +19,12 @@ module WorldCat
     #
     # RDF properties are mapped via an ORM style mapping.
     # 
-    # [facet_list] RDF predicate: http://worldcat.org/searcho/facetList; returns: WorldCat::Discovery::FacetList
+    # [facets] RDF predicate: http://worldcat.org/vocab/discovery/facet; returns: Array of WorldCat::Discovery::Facet objects
     
     class BibSearchResults < SearchResults
       
-      property :facet_list, :predicate => DISCOVERY_FACET_LIST, :type => 'FacetList'
+      has_many :facets, :predicate => DISCOVERY_FACET, :type => 'Facet'
+      has_many :items, :predicate => DCTERMS_HAS_PART, :type => 'GenericResource'
       
       # call-seq:
       #   bibs() => Array of WorldCat::Discovery::Bib objects
@@ -42,18 +43,6 @@ module WorldCat
         sorted_bibs
       end
       
-      # call-seq:
-      #   facets() => Array of WorldCat::Discovery::Facet objects
-      # 
-      # Retuns the facets for the current search results if they were requested on the corresponding request.
-      def facets
-        if self.facet_list
-          self.facet_list.facets
-        else
-          nil
-        end
-      end
-
     end
   end
 end

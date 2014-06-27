@@ -18,8 +18,8 @@ describe WorldCat::Discovery do
   
   context "when loading the API key into configuration" do
     before(:all) do
-      @wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      WorldCat::Discovery.configure(@wskey)
+      @wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+      WorldCat::Discovery.configure(@wskey, 128807, 128807)
     end
     
     it "should return the right key" do

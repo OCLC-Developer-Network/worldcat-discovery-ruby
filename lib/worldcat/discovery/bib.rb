@@ -74,7 +74,9 @@ module WorldCat
       # 
       # Returns Bib author from RDF predicate: http://schema.org/author
       def author
-        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first
+        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_CREATOR).first
+        author_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUTHOR).first if author_stmt.nil?
+
         if author_stmt
           author_type = Spira.repository.query(:subject => author_stmt.object, :predicate => RDF.type).first
           case author_type.object
@@ -107,7 +109,7 @@ module WorldCat
       # Parameters
       # 
       # [:q] the primary query required to conduct a search of WorldCat
-      # [:facets] an array of facets to be returned. Facets should be specified as +facet_name:num_facets+
+      # [:facetFields] an array of facets to be returned. Facets should be specified as +facet_name:num_facets+
       # [:startNum] the integer offset from the begining of the search result set. defaults to 0
       def self.search(params)
         uri = Addressable::URI.parse("#{Bib.production_url}/search")
@@ -116,7 +118,7 @@ module WorldCat
         
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
         Spira.repository = RDF::Repository.new.from_rdfxml(response)
-        search_results = Spira.repository.query(:predicate => RDF.type, :object => SCHEMA_SEARCH_RES_PAGE).first.subject.as(BibSearchResults)
+        search_results = Spira.repository.query(:predicate => RDF.type, :object => DISCOVERY_SEARCH_RESULTS).first.subject.as(BibSearchResults)
         
         # WorldCat::Discovery::SearchResults.new
         search_results
@@ -149,10 +151,10 @@ module WorldCat
       def self.get_data(url)
         # Retrieve the key from the singleton configuration object
         raise ConfigurationException.new unless WorldCat::Discovery.configured?()
-        wskey = WorldCat::Discovery.api_key
+        token = WorldCat::Discovery.access_token
+        auth = "Bearer #{token.value}"
         
         # Make the HTTP request for the data
-        auth = wskey.hmac_signature('GET', url)
         resource = RestClient::Resource.new url
         resource.get(:authorization => auth, 
             :user_agent => "WorldCat::Discovery Ruby gem / #{WorldCat::Discovery::VERSION}",

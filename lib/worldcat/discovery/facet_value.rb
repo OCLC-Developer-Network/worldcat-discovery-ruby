@@ -21,7 +21,7 @@ module WorldCat
     # 
     # [type] RDF predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type; returns: RDF::URI
     # [name] RDF predicate: http://schema.org/name; returns: String
-    # [count] RDF predicate: http://worldcat.org/searcho/count; returns: Integer
+    # [count] RDF predicate: http://worldcat.org/vocab/discovery/count; returns: Integer
     
     class FacetValue < Spira::Base
       

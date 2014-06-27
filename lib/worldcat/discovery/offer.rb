@@ -67,13 +67,26 @@ module WorldCat
         "https://beta.worldcat.org/discovery/offer"
       end
       
+      # def self.get_data(url)
+      #   # Retrieve the key from the singleton configuration object
+      #   raise ConfigurationException.new unless WorldCat::Discovery.configured?()
+      #   wskey = WorldCat::Discovery.api_key
+      #
+      #   # Make the HTTP request for the data
+      #   auth = wskey.hmac_signature('GET', url)
+      #   resource = RestClient::Resource.new url
+      #   resource.get(:authorization => auth,
+      #       :user_agent => "WorldCat::Discovery Ruby gem / #{WorldCat::Discovery::VERSION}",
+      #       :accept => 'application/rdf+xml')
+      # end
+      
       def self.get_data(url)
         # Retrieve the key from the singleton configuration object
         raise ConfigurationException.new unless WorldCat::Discovery.configured?()
-        wskey = WorldCat::Discovery.api_key
+        token = WorldCat::Discovery.access_token
+        auth = "Bearer #{token.value}"
         
         # Make the HTTP request for the data
-        auth = wskey.hmac_signature('GET', url)
         resource = RestClient::Resource.new url
         resource.get(:authorization => auth, 
             :user_agent => "WorldCat::Discovery Ruby gem / #{WorldCat::Discovery::VERSION}",

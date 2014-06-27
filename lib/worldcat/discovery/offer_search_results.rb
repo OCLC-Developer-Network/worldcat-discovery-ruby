@@ -17,9 +17,9 @@ module WorldCat
     class OfferSearchResults < SearchResults
       
       has_many :items, :predicate => DCTERMS_HAS_PART, :type => 'Offer'
-      property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS2, :type => XSD.integer
-      property :start_index, :predicate => DISCOVERY_START_INDEX2, :type => XSD.integer
-      property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE2, :type => XSD.integer
+      property :total_results, :predicate => DISCOVERY_TOTAL_RESULTS, :type => XSD.integer
+      property :start_index, :predicate => DISCOVERY_START_INDEX, :type => XSD.integer
+      property :items_per_page, :predicate => DISCOVERY_ITEMS_PER_PAGE, :type => XSD.integer
       
       # call-seq:
       #   offers() => Array of WorldCat::Discovery::Offer objects

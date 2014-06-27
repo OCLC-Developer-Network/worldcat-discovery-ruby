@@ -18,8 +18,13 @@ describe WorldCat::Discovery::Offer do
   
   context "when retrieving holdings as offers for a bib" do
     before(:all) do
-      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      WorldCat::Discovery.configure(wskey)
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+      WorldCat::Discovery.configure(wskey, 128807, 128807)
+      
+      access_token_request_url = "https://authn.sd00.worldcat.org/oauth2/accessToken?" + 
+          "authenticatingInstitutionId=128807&contextInstitutionId=128807&" + 
+          "grant_type=client_credentials&scope=WorldCatDiscoveryAPI"
+      stub_request(:post, access_token_request_url).to_return(:body => body_content("access_token.json"), :status => 200)
 
       url = 'https://beta.worldcat.org/discovery/offer/oclc/30780581'
       stub_request(:get, url).to_return(:body => body_content("offer_set.rdf"), :status => 200)
