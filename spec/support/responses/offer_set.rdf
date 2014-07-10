@@ -11,84 +11,74 @@
     xmlns:j.6="http://xmlns.com/foaf/0.1/"
     xmlns:j.7="http://rdfs.org/ns/void#" > 
   <rdf:Description rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AIZ"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A1"/>
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A1"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/2081"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</j.2:displayPosition>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A3"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/105760"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/39603">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>AL AKHAWAYN UNIV LIBR</schema:name>
     <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ALAUL"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://132.174.253.29:8080/discovery/offer/oclc/30780581?itemsPerPage=10&amp;startNum=0">
-    <j.0:hasPart rdf:nodeID="A1"/>
-    <j.0:hasPart rdf:nodeID="A2"/>
-    <rdf:type rdf:resource="http://worldcat.org/vocab/discovery/SearchResults"/>
-    <schema:relatedLink rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://132.174.253.29:8080/discovery/offer/oclc/30780581?itemsPerPage=10&amp;startNum=10</schema:relatedLink>
-    <j.4:startIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</j.4:startIndex>
-    <j.0:hasPart rdf:nodeID="A3"/>
-    <j.0:hasPart rdf:nodeID="A4"/>
-    <j.0:hasPart rdf:nodeID="A5"/>
-    <j.0:hasPart rdf:nodeID="A6"/>
-    <j.0:hasPart rdf:nodeID="A7"/>
-    <j.0:hasPart rdf:nodeID="A8"/>
-    <j.4:itemsPerPage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</j.4:itemsPerPage>
-    <j.4:totalResults rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">439</j.4:totalResults>
-    <j.0:hasPart rdf:nodeID="A9"/>
-    <j.4:startIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</j.4:startIndex>
-    <j.0:hasPart rdf:nodeID="A10"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A3">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A11"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/2081"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</j.2:displayPosition>
-  </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/2081">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>APPALACHIAN STATE UNIV</schema:name>
     <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/NJB"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/40442">
+  <rdf:Description rdf:nodeID="A4">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ALAUL"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/53565">
     <rdf:type rdf:resource="http://schema.org/Library"/>
-    <schema:name>ARIZONA WESTERN COL ACAD LIBR</schema:name>
-    <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AZY"/>
+    <schema:name>AMERICAN UNIV OF BEIRUT</schema:name>
+    <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/LEAUB"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A6">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/LEAUB"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A7"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://dewey.info/class/192/e20/">
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A12">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AZS"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A10"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A7">
+  <rdf:Description rdf:nodeID="A8">
     <rdf:type rdf:resource="http://schema.org/Offer"/>
     <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A13"/>
+    <schema:itemOffered rdf:nodeID="A9"/>
     <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/85582"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</j.2:displayPosition>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/87823"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/AMH">
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
     <j.1:oclcSymbol>AMH</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/1309"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A13">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ALBRS"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A7"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://id.worldcat.org/fast/1060777">
     <schema:name xml:lang="en">Philosophy.</schema:name>
     <schema:name xml:lang="en">Philosophy</schema:name>
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A10">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AZS"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A11"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.worldcat.org/oclc/30780581">
     <schema:about rdf:resource="http://dewey.info/class/192/e20/"/>
@@ -118,15 +108,31 @@
     <schema:workExample rdf:resource="http://worldcat.org/isbn/9780631193623"/>
     <schema:name xml:lang="en">The Wittgenstein reader</schema:name>
   </rdf:Description>
-  <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/ACD">
-    <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
-    <j.1:oclcSymbol>ACD</j.1:oclcSymbol>
-    <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/170"/>
+  <rdf:Description rdf:nodeID="A11">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A10"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/40437"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/1309">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>AMHERST COL</schema:name>
     <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AMH"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/CNTAB">
+    <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
+    <j.1:oclcSymbol>CNTAB</j.1:oclcSymbol>
+    <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/105760"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A7">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A6"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/53565"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://id.loc.gov/authorities/subjects/sh85100849">
     <schema:name xml:lang="en">Philosophy.</schema:name>
@@ -136,14 +142,6 @@
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
     <j.1:oclcSymbol>EIP</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/46282"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A10">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A12"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/40437"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/ALBRS">
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
@@ -158,6 +156,17 @@
     <schema:sameAs rdf:resource="urn:isbn:0631193626"/>
     <schema:sameAs rdf:resource="urn:isbn:9780631193623"/>
   </rdf:Description>
+  <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/LEAUB">
+    <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
+    <j.1:oclcSymbol>LEAUB</j.1:oclcSymbol>
+    <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/53565"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A12">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ALBRS"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A13"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/72545">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>ACADEMIA SINICA INST EUROPEAN AM STUDIES</schema:name>
@@ -168,57 +177,46 @@
     <j.1:oclcSymbol>ALAUL</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/39603"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A2">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A14"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/46282"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</j.2:displayPosition>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A15">
+  <rdf:Description rdf:nodeID="A14">
     <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AZY"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/EIP"/>
     <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A9"/>
+    <schema:offers rdf:nodeID="A15"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/87823">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>AICHI PREFECTURAL UNIV</schema:name>
     <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AHI"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A1">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A0"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/72545"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</j.2:displayPosition>
-  </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/NJB">
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
     <j.1:oclcSymbol>NJB</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/2081"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A14">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/EIP"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A2"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://experiment.worldcat.org/entity/work/data/45185752#Topic/wissenschaftstheorie">
     <schema:name xml:lang="en">Wissenschaftstheorie.</schema:name>
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/AZY">
-    <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
-    <j.1:oclcSymbol>AZY</j.1:oclcSymbol>
-    <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/40442"/>
+  <rdf:Description rdf:nodeID="A5">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A4"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/39603"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/40437">
     <rdf:type rdf:resource="http://schema.org/Library"/>
     <schema:name>ARIZONA STATE UNIV</schema:name>
     <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AZS"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A15">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A14"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/46282"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://viaf.org/viaf/24609378">
     <schema:deathDate>1951</schema:deathDate>
@@ -237,14 +235,6 @@
     <schema:name xml:lang="en">Filosofia contemporânea--Alemanha.</schema:name>
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A9">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A15"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/40442"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</j.2:displayPosition>
-  </rdf:Description>
   <rdf:Description rdf:about="http://id.loc.gov/vocabulary/countries/enk">
     <j.0:identifier>enk</j.0:identifier>
     <rdf:type rdf:resource="http://schema.org/Place"/>
@@ -257,19 +247,17 @@
     <schema:sameAs rdf:resource="urn:isbn:0631193618"/>
     <schema:sameAs rdf:resource="urn:isbn:9780631193616"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A8">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A16"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/87823"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</j.2:displayPosition>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A17">
+  <rdf:Description rdf:nodeID="A16">
     <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ACD"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AIZ"/>
     <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A5"/>
+    <schema:offers rdf:nodeID="A17"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A18">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AMH"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A19"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/85582">
     <rdf:type rdf:resource="http://schema.org/Library"/>
@@ -279,21 +267,25 @@
   <rdf:Description rdf:about="http://id.loc.gov/authorities/classification/B3376">
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A18">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AMH"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A6"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://experiment.worldcat.org/entity/work/data/45185752#Topic/analytische_philosophie">
     <schema:name xml:lang="en">Analytische Philosophie.</schema:name>
     <rdf:type rdf:resource="http://schema.org/Intangible"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A16">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AHI"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A8"/>
+  <rdf:Description rdf:nodeID="A13">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A12"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/85582"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</j.2:displayPosition>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A19">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A18"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/1309"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</j.2:displayPosition>
   </rdf:Description>
   <rdf:Description rdf:about="http://viaf.org/viaf/39391468">
     <schema:birthDate>1931</schema:birthDate>
@@ -302,26 +294,48 @@
     <schema:name>Kenny, Anthony, 1931-</schema:name>
     <rdf:type rdf:resource="http://schema.org/Person"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A5">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A17"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/170"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</j.2:displayPosition>
+  <rdf:Description rdf:nodeID="A9">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/AHI"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A8"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A6">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A18"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/1309"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</j.2:displayPosition>
+  <rdf:Description rdf:about="http://discapiciws01dxdu.dev.oclc.org:8080/discovery/offer/oclc/30780581?itemsPerPage=10&amp;startNum=0">
+    <j.4:itemsPerPage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</j.4:itemsPerPage>
+    <schema:relatedLink rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://discapiciws01dxdu.dev.oclc.org:8080/discovery/offer/oclc/30780581?itemsPerPage=10&amp;startNum=10</schema:relatedLink>
+    <j.0:hasPart rdf:nodeID="A5"/>
+    <j.4:totalResults rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">567</j.4:totalResults>
+    <j.0:hasPart rdf:nodeID="A13"/>
+    <j.0:hasPart rdf:nodeID="A2"/>
+    <rdf:type rdf:resource="http://worldcat.org/vocab/discovery/SearchResults"/>
+    <j.0:hasPart rdf:nodeID="A15"/>
+    <j.0:hasPart rdf:nodeID="A7"/>
+    <j.0:hasPart rdf:nodeID="A19"/>
+    <j.4:startIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</j.4:startIndex>
+    <j.0:hasPart rdf:nodeID="A17"/>
+    <j.0:hasPart rdf:nodeID="A8"/>
+    <j.0:hasPart rdf:nodeID="A0"/>
+    <j.4:startIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</j.4:startIndex>
+    <j.0:hasPart rdf:nodeID="A11"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/oclc-symbol/resource/AIZ">
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
     <j.1:oclcSymbol>AIZ</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/72545"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A17">
+    <rdf:type rdf:resource="http://schema.org/Offer"/>
+    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
+    <schema:itemOffered rdf:nodeID="A16"/>
+    <schema:price>0</schema:price>
+    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/72545"/>
+    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</j.2:displayPosition>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/NJB"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A0"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.worldcat.org/title/-/oclc/30780581">
     <j.7:inDataset rdf:resource="http://purl.oclc.org/dataset/WorldCat"/>
@@ -337,13 +351,16 @@
     <schema:name>Oxford, UK</schema:name>
     <rdf:type rdf:resource="http://schema.org/Place"/>
   </rdf:Description>
-  <rdf:Description rdf:nodeID="A4">
-    <rdf:type rdf:resource="http://schema.org/Offer"/>
-    <schema:businessFunction rdf:resource="http://purl.org/goodrelations/v1#LeaseOut"/>
-    <schema:itemOffered rdf:nodeID="A19"/>
-    <schema:price>0</schema:price>
-    <schema:seller rdf:resource="http://worldcat.org/wcr/organization/resource/39603"/>
-    <j.2:displayPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</j.2:displayPosition>
+  <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/105760">
+    <rdf:type rdf:resource="http://schema.org/Library"/>
+    <schema:name>AMBROSE UNIV COLLEGE</schema:name>
+    <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/CNTAB"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
+    <schema:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/CNTAB"/>
+    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
+    <schema:offers rdf:nodeID="A2"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/46282">
     <rdf:type rdf:resource="http://schema.org/Library"/>
@@ -354,23 +371,6 @@
     <rdf:type rdf:resource="http://purl.org/dc/terms/Collection"/>
     <j.1:oclcSymbol>AZS</j.1:oclcSymbol>
     <j.3:managedBy rdf:resource="http://worldcat.org/wcr/organization/resource/40437"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A11">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/NJB"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A3"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://worldcat.org/wcr/organization/resource/170">
-    <rdf:type rdf:resource="http://schema.org/Library"/>
-    <schema:name>ART CTR COL OF DESIGN, JAMES L FOGG LIBR</schema:name>
-    <j.1:manages rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ACD"/>
-  </rdf:Description>
-  <rdf:Description rdf:nodeID="A19">
-    <rdf:type rdf:resource="http://schema.org/SomeProducts"/>
-    <j.0:isPartOf rdf:resource="http://worldcat.org/wcr/oclc-symbol/resource/ALAUL"/>
-    <schema:model rdf:resource="http://www.worldcat.org/oclc/30780581"/>
-    <schema:offers rdf:nodeID="A4"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://experiment.worldcat.org/entity/work/data/45185752#Agent/b_blackwell">
     <schema:name>B. Blackwell</schema:name>

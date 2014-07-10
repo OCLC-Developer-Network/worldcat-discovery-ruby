@@ -36,7 +36,7 @@ describe WorldCat::Discovery::Offer do
     end
 
     it "should contain the right id" do
-      uri = RDF::URI("http://132.174.253.29:8080/discovery/offer/oclc/30780581?itemsPerPage=10&startNum=0")
+      uri = RDF::URI("http://discapiciws01dxdu.dev.oclc.org:8080/discovery/offer/oclc/30780581?itemsPerPage=10&startNum=0")
       @results.id.should == uri
     end
     
@@ -59,11 +59,11 @@ describe WorldCat::Discovery::Offer do
     end
     
     it "should have the correct total results" do
-      @results.total_results.should == 439
+      @results.total_results.should == 567
     end
     
     it "should have the correct start index" do
-      @results.start_index.should == 1
+      @results.start_index.should == 0
     end
     
     it "should have the correct items per page" do
@@ -87,7 +87,7 @@ describe WorldCat::Discovery::Offer do
       end
       
       it "should have the correct item offered" do
-        @item_offered.subject.should == RDF::Node.new("A0")
+        @item_offered.subject.should == RDF::Node.new("A16")
         @item_offered.type.should == RDF::URI.new('http://schema.org/SomeProducts')
         @item_offered.bib.subject.should == RDF::URI.new('http://www.worldcat.org/oclc/30780581')
         @item_offered.bib.name.should == 'The Wittgenstein reader'

@@ -22,7 +22,7 @@ module WorldCat
     class SomeProducts < Spira::Base
       
       property :type, :predicate => RDF.type, :type => RDF::URI
-      property :collection, :predicate => DCTERMS_IS_PART_OF, :type => 'Collection'
+      property :collection, :predicate => SCHEMA_IS_PART_OF, :type => 'Collection'
       property :bib, :predicate => SCHEMA_MODEL, :type => 'Bib'
       
       # call-seq:
