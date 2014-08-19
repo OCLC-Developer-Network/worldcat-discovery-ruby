@@ -242,12 +242,12 @@ describe WorldCat::Discovery::Bib do
         end
 
         it "should contain the right id" do
-          uri = RDF::URI("https://beta.worldcat.org/discovery/bib/search?facetFields=author:10&facetFields=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
+          uri = RDF::URI("http://beta.worldcat.org/discovery/bib/search?dbIds=638&facetFields=author:10&facetFields=inLanguage:10&itemsPerPage=10&q=wittgenstein reader&startNum=0")
           @results.id.should == uri
         end
 
         it "should have the right number for total results" do
-          @results.total_results.should == 779
+          @results.total_results.should == 1137
         end
 
         it "should have the right start index" do
