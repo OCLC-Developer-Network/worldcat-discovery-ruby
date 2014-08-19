@@ -38,8 +38,10 @@ describe WorldCat::Discovery::Bib do
   
   context "when loading bibliographic data" do
     before(:all) do
-      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret')
-      WorldCat::Discovery.configure(wskey)
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+      WorldCat::Discovery.configure(wskey, 128807, 128807)
+      url = 'https://authn.sd00.worldcat.org/oauth2/accessToken?authenticatingInstitutionId=128807&contextInstitutionId=128807&grant_type=client_credentials&scope=WorldCatDiscoveryAPI'
+      stub_request(:post, url).to_return(:body => body_content("token.json"), :status => 200)
     end
 
     context "from a single resource from the RDF data for The Wittgenstein Reader" do
@@ -230,7 +232,7 @@ describe WorldCat::Discovery::Bib do
     context "from searching for bib resources" do
       context "when retrieving the first page of results" do
         before(:all) do
-          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facetFields=author:10&facetFields=inLanguage:10'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facetFields=author:10&facetFields=inLanguage:10&dbIds=638'
           stub_request(:get, url).to_return(:body => body_content("bib_search.rdf"), :status => 200)
           @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :facetFields => ['author:10', 'inLanguage:10'])
         end
@@ -323,7 +325,7 @@ describe WorldCat::Discovery::Bib do
       
       context "when paging for the second list of results" do 
         before(:all) do
-          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&startNum=10'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&startNum=10&dbIds=638'
           stub_request(:get, url).to_return(:body => body_content("bib_search_page_two.rdf"), :status => 200)
           @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :startNum => 10)
         end
