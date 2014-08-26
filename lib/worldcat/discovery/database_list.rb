@@ -14,6 +14,20 @@
 
 module WorldCat
   module Discovery
-    VERSION = "0.4.0"
+    class DatabaseList
+      
+      def initialize
+        @databases = Array.new
+      end
+            
+      def <<(database)
+        @databases << database
+      end
+      
+      def databases
+        @databases.sort_by {|database| database.name}
+      end
+      
+    end
   end
 end

@@ -60,7 +60,11 @@ module WorldCat
     DISCOVERY_FACET_COUNT    = RDF::URI.new('http://worldcat.org/vocab/discovery/count')
     DISCOVERY_FACET_VALUE    = RDF::URI.new('http://worldcat.org/vocab/discovery/facetValue')
     DISCOVERY_SEARCH_RESULTS = RDF::URI.new('http://worldcat.org/vocab/discovery/SearchResults')
+    DISCOVERY_DB_ID          = RDF::URI.new('http://worldcat.org/vocab/discovery/dbId')
+    DISCOVERY_OPEN           = RDF::URI.new('http://worldcat.org/vocab/discovery/openAccess')
+    DISCOVERY_REQUIRES_AUTHN = RDF::URI.new('http://worldcat.org/vocab/discovery/requiresAuthentication')
     GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
+    DCMITYPE_DATASET         = RDF::URI.new('http://purl.org/dc/dcmitype/Dataset')
     
   end
 end
