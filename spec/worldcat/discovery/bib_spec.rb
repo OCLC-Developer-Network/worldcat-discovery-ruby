@@ -140,7 +140,6 @@ describe WorldCat::Discovery::Bib do
           p = place if place.id == RDF::URI('http://experiment.worldcat.org/entity/work/data/45185752#Place/oxford_uk')
           p
         end
-        puts oxford.inspect
         oxford.class.should == WorldCat::Discovery::Place
         oxford.type.should == 'http://schema.org/Place'
         oxford.name.should == 'Oxford, UK'
