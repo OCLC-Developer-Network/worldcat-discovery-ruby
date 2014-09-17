@@ -115,7 +115,7 @@ module WorldCat
         uri = Addressable::URI.parse("#{Bib.production_url}/search")
         params[:dbIds] = (params[:dbIds].nil? or params[:dbIds].size == 0) ? 638 : params[:dbIds]
         uri.query_values = params
-        response, result = get_data(uri.to_s)
+        response, result = WorldCat::Discovery.get_data(uri.to_s)
         
         if result.class == Net::HTTPOK
           # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
@@ -143,7 +143,7 @@ module WorldCat
       # [oclc_number] the WorldCat OCLC number for a bibliographic resource
       def self.find(oclc_number)
         url = "#{Bib.production_url}/data/#{oclc_number}"
-        response, result = get_data(url)
+        response, result = WorldCat::Discovery.get_data(url)
 
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
         Spira.repository = RDF::Repository.new.from_rdfxml(response)
@@ -158,22 +158,7 @@ module WorldCat
       def self.production_url
         "https://beta.worldcat.org/discovery/bib"
       end
-      
-      def self.get_data(url)
-        # Retrieve the key from the singleton configuration object
-        raise ConfigurationException.new unless WorldCat::Discovery.configured?()
-        token = WorldCat::Discovery.access_token
-        auth = "Bearer #{token.value}"
-        
-        # Make the HTTP request for the data
-        resource = RestClient::Resource.new url
-        resource.get(:authorization => auth, 
-            :user_agent => "WorldCat::Discovery Ruby gem / #{WorldCat::Discovery::VERSION}",
-            :accept => 'application/rdf+xml') do |response, request, result|
-          [response, result]
-        end
-      end
-      
+
     end
   end
 end
