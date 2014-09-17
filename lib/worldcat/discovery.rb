@@ -44,6 +44,7 @@ require "worldcat/discovery/offer"
 require "worldcat/discovery/some_products"
 require "worldcat/discovery/collection"
 require "worldcat/discovery/library"
+require "worldcat/discovery/client_request_error"
 
 module WorldCat
   module Discovery

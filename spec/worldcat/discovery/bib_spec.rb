@@ -228,7 +228,7 @@ describe WorldCat::Discovery::Bib do
       end
     end
 
-    context "from searching for bib resources" do
+    context "from a search for bib resources" do
       context "when retrieving the first page of results" do
         before(:all) do
           url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&facetFields=creator:10&facetFields=inLanguage:10&dbIds=638'
@@ -331,6 +331,43 @@ describe WorldCat::Discovery::Bib do
           @results.start_index.should == 10
         end
         
+      end
+    end
+  end
+  
+  context "when sending malformed queries to the API" do
+    before(:all) do
+      wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+      WorldCat::Discovery.configure(wskey, 128807, 128807)
+      url = 'https://authn.sd00.worldcat.org/oauth2/accessToken?authenticatingInstitutionId=128807&contextInstitutionId=128807&grant_type=client_credentials&scope=WorldCatDiscoveryAPI'
+      stub_request(:post, url).to_return(:body => body_content("token.json"), :status => 200)
+    end
+    
+    context "if sending an empty q parameter" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/search?q=&dbIds=638'
+        stub_request(:get, url).to_return(:body => body_content("error_response_empty_query.rdf"), :status => 400)
+        @results = WorldCat::Discovery::Bib.search(:q => '')
+      end
+      
+      it "should return a client request error" do
+        @results.class.should == WorldCat::Discovery::ClientRequestError
+      end
+
+      it "should contain the right id" do
+        @results.subject.should == RDF::Node.new("A0")
+      end
+
+      it "should have an error message" do
+        @results.error_message.should == 'Invalid q parameter.  Please provide a value for the q parameter which is at least 3 characters in length.'
+      end
+      
+      it "should have an error code" do
+        @results.error_code.should == 400
+      end
+      
+      it "should have an error type" do
+        @results.error_type.should == 'http'
       end
     end
   end

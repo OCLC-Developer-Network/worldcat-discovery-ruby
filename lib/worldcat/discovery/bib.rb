@@ -115,14 +115,24 @@ module WorldCat
         uri = Addressable::URI.parse("#{Bib.production_url}/search")
         params[:dbIds] = (params[:dbIds].nil? or params[:dbIds].size == 0) ? 638 : params[:dbIds]
         uri.query_values = params
-        response = get_data(uri.to_s)
+        response, result = get_data(uri.to_s)
         
-        # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
-        Spira.repository = RDF::Repository.new.from_rdfxml(response)
-        search_results = Spira.repository.query(:predicate => RDF.type, :object => DISCOVERY_SEARCH_RESULTS).first.subject.as(BibSearchResults)
-        
-        # WorldCat::Discovery::SearchResults.new
-        search_results
+        if result.class == Net::HTTPOK
+          # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
+          Spira.repository = RDF::Repository.new.from_rdfxml(response)
+          search_results = Spira.repository.query(:predicate => RDF.type, :object => DISCOVERY_SEARCH_RESULTS).first.subject.as(BibSearchResults)
+          search_results.response_body = response
+          search_results.response_code = response.code
+          search_results.result = result
+          search_results
+        else
+          Spira.repository = RDF::Repository.new.from_rdfxml(response)
+          client_request_error = Spira.repository.query(:predicate => RDF.type, :object => CLIENT_REQUEST_ERROR).first.subject.as(ClientRequestError)
+          client_request_error.response_body = response
+          client_request_error.response_code = response.code
+          client_request_error.result = result
+          client_request_error
+        end
       end
             
       # call-seq:
@@ -133,7 +143,7 @@ module WorldCat
       # [oclc_number] the WorldCat OCLC number for a bibliographic resource
       def self.find(oclc_number)
         url = "#{Bib.production_url}/data/#{oclc_number}"
-        response = get_data(url)
+        response, result = get_data(url)
 
         # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
         Spira.repository = RDF::Repository.new.from_rdfxml(response)
@@ -159,7 +169,9 @@ module WorldCat
         resource = RestClient::Resource.new url
         resource.get(:authorization => auth, 
             :user_agent => "WorldCat::Discovery Ruby gem / #{WorldCat::Discovery::VERSION}",
-            :accept => 'application/rdf+xml') 
+            :accept => 'application/rdf+xml') do |response, request, result|
+          [response, result]
+        end
       end
       
     end
