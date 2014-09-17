@@ -43,6 +43,8 @@ module WorldCat
     
     class Bib < Spira::Base
       
+      attr_accessor :response_body, :response_code, :result
+      
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
       property :oclc_number, :predicate => LIB_OCLC_NUMBER, :type => XSD.integer
       property :work_uri, :predicate => SCHEMA_EXAMPLE_OF_WORK, :type => RDF::URI
@@ -144,13 +146,24 @@ module WorldCat
       def self.find(oclc_number)
         url = "#{Bib.production_url}/data/#{oclc_number}"
         response, result = WorldCat::Discovery.get_data(url)
-
-        # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
-        Spira.repository = RDF::Repository.new.from_rdfxml(response)
-        generic_resource = Spira.repository.query(:predicate => RDF.type, :object => GENERIC_RESOURCE).first
-        bib = generic_resource.subject.as(GenericResource).about
         
-        bib
+        if result.class == Net::HTTPOK
+          # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
+          Spira.repository = RDF::Repository.new.from_rdfxml(response)
+          generic_resource = Spira.repository.query(:predicate => RDF.type, :object => GENERIC_RESOURCE).first
+          bib = generic_resource.subject.as(GenericResource).about
+          bib.response_body = response
+          bib.response_code = response.code
+          bib.result = result
+          bib
+        else
+          Spira.repository = RDF::Repository.new.from_rdfxml(response)
+          client_request_error = Spira.repository.query(:predicate => RDF.type, :object => CLIENT_REQUEST_ERROR).first.subject.as(ClientRequestError)
+          client_request_error.response_body = response
+          client_request_error.response_code = response.code
+          client_request_error.result = result
+          client_request_error
+        end
       end
 
       protected

@@ -370,5 +370,33 @@ describe WorldCat::Discovery::Bib do
         @results.error_type.should == 'http'
       end
     end
+    
+    context "if sending an empty q parameter" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/data/999999999999999'
+        stub_request(:get, url).to_return(:body => body_content("error_response_not_found.rdf"), :status => 404)
+        @results = WorldCat::Discovery::Bib.find(999999999999999)
+      end
+      
+      it "should return a client request error" do
+        @results.class.should == WorldCat::Discovery::ClientRequestError
+      end
+
+      it "should contain the right id" do
+        @results.subject.should == RDF::Node.new("A0")
+      end
+
+      it "should have an error message" do
+        @results.error_message.should == 'The requested record could not be found.'
+      end
+      
+      it "should have an error code" do
+        @results.error_code.should == 404
+      end
+      
+      it "should have an error type" do
+        @results.error_type.should == 'http'
+      end
+    end
   end
 end
