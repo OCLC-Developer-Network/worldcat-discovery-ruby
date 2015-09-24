@@ -48,7 +48,7 @@ module WorldCat
     SCHEMA_FAMILY_NAME     = RDF::URI.new('http://schema.org/familyName')
     SCHEMA_BIRTH_DATE      = RDF::URI.new('http://schema.org/birthDate')
     SCHEMA_DEATH_DATE      = RDF::URI.new('http://schema.org/deathDate')
-    OWL_SAME_AS            = RDF::URI.new('http://www.w3.org/2002/07/owl#sameAs')
+    SCHEMA_SAME_AS         = RDF::URI.new('http://schema.org/sameAs')
     DCTERMS_COLLECTION     = RDF::URI.new('http://purl.org/dc/terms/Collection')
     LIB_OCLC_NUMBER        = RDF::URI.new('http://purl.org/library/oclcnum')
     LIB_OCLC_SYMBOL        = RDF::URI.new('http://purl.org/library/oclcSymbol')

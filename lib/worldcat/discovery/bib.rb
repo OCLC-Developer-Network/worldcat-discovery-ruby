@@ -51,7 +51,7 @@ module WorldCat
       property :num_pages, :predicate => SCHEMA_NUMBER_OF_PAGES, :type => XSD.string
       property :date_published, :predicate => SCHEMA_DATE_PUBLISHED, :type => XSD.string
       property :type, :predicate => RDF.type, :type => RDF::URI
-      property :same_as, :predicate => OWL_SAME_AS, :type => RDF::URI
+      property :same_as, :predicate => SCHEMA_SAME_AS, :type => RDF::URI
       property :language, :predicate => SCHEMA_IN_LANGUAGE, :type => XSD.string
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
