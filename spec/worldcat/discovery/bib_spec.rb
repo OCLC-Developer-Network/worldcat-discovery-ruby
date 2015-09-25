@@ -324,9 +324,9 @@ describe WorldCat::Discovery::Bib do
       
       context "when paging for the second list of results" do 
         before(:all) do
-          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&startNum=10&dbIds=638'
+          url = 'https://beta.worldcat.org/discovery/bib/search?q=wittgenstein+reader&startIndex=10&dbIds=638'
           stub_request(:get, url).to_return(:body => body_content("bib_search_page_two.rdf"), :status => 200)
-          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :startNum => 10)
+          @results = WorldCat::Discovery::Bib.search(:q => 'wittgenstein reader', :startIndex => 10)
         end
 
         it "should have the right start index" do

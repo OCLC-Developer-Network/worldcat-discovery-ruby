@@ -112,7 +112,7 @@ module WorldCat
       # 
       # [:q] the primary query required to conduct a search of WorldCat
       # [:facetFields] an array of facets to be returned. Facets should be specified as +facet_name:num_facets+
-      # [:startNum] the integer offset from the begining of the search result set. defaults to 0
+      # [:startIndex] the integer offset from the beginning of the search result set. defaults to 0
       def self.search(params)
         uri = Addressable::URI.parse("#{Bib.production_url}/search")
         params[:dbIds] = (params[:dbIds].nil? or params[:dbIds].size == 0) ? 638 : params[:dbIds]
