@@ -243,12 +243,12 @@ describe WorldCat::Discovery::Bib do
         end
 
         it "should contain the right id" do
-          uri = RDF::URI("https://beta.worldcat.org/discovery/bib/search?dbIds=638=10=wittgenstein reader=relevance=0")
+          uri = RDF::URI("https://beta.worldcat.org/discovery/bib/search?dbIds=638=creator:10=inLanguage:10=10=wittgenstein reader=relevance=0")
           @results.id.should == uri
         end
 
         it "should have the right number for total results" do
-          @results.total_results.should == 1335
+          @results.total_results.should == 1331
         end
 
         it "should have the right start index" do
@@ -293,13 +293,13 @@ describe WorldCat::Discovery::Bib do
 
           it "should have facets with the correct IDs" do
             ids = @results.facets.map{|facet| facet.id.to_s}
-            ids.should include("_:A1")
-            ids.should include("_:A2")
+            ids.should include("_:A7")
+            ids.should include("_:A19")
           end
 
           it "should have facet values with the correct IDs" do
             value_ids = @results.facets.first.values.map{|value| value.id.to_s}
-            ["_:A9", "_:A7", "_:A14", "_:A3", "_:A11", "_:A12", "_:A8", "_:A10", "_:A13", "_:A15"].each do |node_id|
+            ["_:A3", "_:A6", "_:A5", "_:A11", "_:A12", "_:A9", "_:A10", "_:A13", "_:A8", "_:A1"].each do |node_id|
               value_ids.should include(node_id)
             end
           end      
