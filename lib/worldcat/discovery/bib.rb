@@ -62,6 +62,7 @@ module WorldCat
       has_many :descriptions, :predicate => SCHEMA_DESCRIPTION, :type => XSD.string
       has_many :reviews, :predicate => SCHEMA_REVIEW, :type => 'Review'
       has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
+      has_many :types, :predicate => RDF.type, :type => RDF::URI
       
       # call-seq:
       #   id() => RDF::URI
@@ -98,7 +99,7 @@ module WorldCat
       #
       # Convenience method for an Array of ISBN strings from the associated WorldCat::Discovery::ProductModel objects
       def isbns
-        self.work_examples.map {|product_model| product_model.isbn}.sort
+        self.work_examples.map {|product_model| product_model.isbns}.flatten.sort
       end
       
       # call-seq:
@@ -155,7 +156,11 @@ module WorldCat
           bib.response_body = response
           bib.response_code = response.code
           bib.result = result
+          
+          bib = self.choseBestType(bib)
+          
           bib
+          
         else
           Spira.repository = RDF::Repository.new.from_rdfxml(response)
           client_request_error = Spira.repository.query(:predicate => RDF.type, :object => CLIENT_REQUEST_ERROR).first.subject.as(ClientRequestError)
@@ -170,6 +175,15 @@ module WorldCat
       
       def self.production_url
         "https://beta.worldcat.org/discovery/bib"
+      end
+      
+      def self.choseBestType(bib)
+        case
+        when bib.types.include?(RDF::URI(SCHEMA_MOVIE))
+          bib.subject.as(Movie)
+        else
+          bib
+        end
       end
 
     end

@@ -73,6 +73,12 @@ module WorldCat
     CLIENT_REQUEST_ERROR     = RDF::URI.new('http://worldcat.org/xmlschemas/response/ClientRequestError')
     GOOD_RELATIONS_POSITION  = RDF::URI.new('http://purl.org/goodrelations/v1#displayPosition')
     DCMITYPE_DATASET         = RDF::URI.new('http://purl.org/dc/dcmitype/Dataset')
+    SCHEMA_MOVIE             = RDF::URI.new('http://schema.org/Movie')
+    SCHEMA_ACTOR             = RDF::URI.new('http://schema.org/actor')
+    SCHEMA_DIRECTOR          = RDF::URI.new('http://schema.org/director')
+    SCHEMA_PRODUCER          = RDF::URI.new('http://schema.org/producer')
+    SCHEMA_MUSICBY           = RDF::URI.new('http://schema.org/musicBy')
+    SCHEMA_PRODUCTIONCOMPANY = RDF::URI.new('http://schema.org/productionCompany')
     
   end
 end

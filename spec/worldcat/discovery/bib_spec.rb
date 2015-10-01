@@ -171,7 +171,7 @@ describe WorldCat::Discovery::Bib do
       end
 
       it "should have the right isbns" do
-        @bib.isbns.sort.should == ['9780631193616', '9780631193623']
+        @bib.isbns.sort.should == ["0631193618", "0631193626", "9780631193616", "9780631193623"]
       end
     end
 
