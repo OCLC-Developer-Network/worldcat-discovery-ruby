@@ -62,6 +62,7 @@ module WorldCat
       has_many :descriptions, :predicate => SCHEMA_DESCRIPTION, :type => XSD.string
       has_many :reviews, :predicate => SCHEMA_REVIEW, :type => 'Review'
       has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
+      has_many :types, :predicate => RDF.type, :type => RDF::URI
       
       # call-seq:
       #   id() => RDF::URI
@@ -151,11 +152,14 @@ module WorldCat
           # Load the data into an in-memory RDF repository, get the GenericResource and its Bib
           Spira.repository = RDF::Repository.new.from_rdfxml(response)
           generic_resource = Spira.repository.query(:predicate => RDF.type, :object => GENERIC_RESOURCE).first
-          bib = generic_resource.subject.as(GenericResource).about
+          
+          #Get the right class based on the RDF Types
+          bib = self.getType(generic_resource)
           bib.response_body = response
           bib.response_code = response.code
           bib.result = result
           bib
+          
         else
           Spira.repository = RDF::Repository.new.from_rdfxml(response)
           client_request_error = Spira.repository.query(:predicate => RDF.type, :object => CLIENT_REQUEST_ERROR).first.subject.as(ClientRequestError)
@@ -170,6 +174,21 @@ module WorldCat
       
       def self.production_url
         "https://beta.worldcat.org/discovery/bib"
+      end
+      
+      def self.getType(generic_resource)
+        bib_stmt = Spira.repository.query(:subject => generic_resource.id, :predicate => SCHEMA_ABOUT).first
+        bib_types = Spira.repository.query(:subject => bib_stmt.object, :predicate => RDF.type)
+
+        bib = case 
+        when bib_types.include?(RDF::URI(SCHEMA_MOVIE)) 
+          bib_stmt.object.as(Movie)
+        else
+          generic_resource.subject.as(GenericResource).about
+        end
+        
+        bib
+        
       end
 
     end
