@@ -18,6 +18,7 @@ module WorldCat
     RDF_TYPE               = RDF::URI.new('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')
     GENERIC_RESOURCE       = RDF::URI.new('http://www.w3.org/2006/gen/ont#ContentTypeGenericResource')
     SCHEMA_ABOUT           = RDF::URI.new('http://schema.org/about')
+    SCHEMA_ALT_NAME        = RDF::URI.new('http://schema.org/alternateName')
     SCHEMA_AUTHOR          = RDF::URI.new('http://schema.org/author')
     SCHEMA_CONTRIBUTOR     = RDF::URI.new('http://schema.org/contributor')
     SCHEMA_CREATOR         = RDF::URI.new('http://schema.org/creator')
@@ -79,6 +80,11 @@ module WorldCat
     SCHEMA_PRODUCER          = RDF::URI.new('http://schema.org/producer')
     SCHEMA_MUSICBY           = RDF::URI.new('http://schema.org/musicBy')
     SCHEMA_PRODUCTIONCOMPANY = RDF::URI.new('http://schema.org/productionCompany')
+    SCHEMA_MUSIC_ALBUM       = RDF::URI.new('http://schema.org/MusicAlbum')
+    SCHEMA_BY_ARTIST         = RDF::URI.new('http://schema.org/byArtist')
+    SCHEMA_PERFORMER         = RDF::URI.new('http://schema.org/performer')
+    SCHEMA_HAS_PART          = RDF::URI.new('http://schema.org/hasPart')
+    RDF_SEE_ALSO             = RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#seeAlso')
     
   end
 end

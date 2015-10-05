@@ -20,10 +20,10 @@ module WorldCat
     # RDF properties are mapped via an ORM style mapping.
     # 
     # [actors] RDF predicate: http://schema.org/actor; returns: Enumerable of WorldCat::Discovery::Person objects
-    # [director] RDF predicate: http://schema.org/director; returns: WorldCat::Discovery::Person objects
+    # [director] RDF predicate: http://schema.org/director; returns: WorldCat::Discovery::Person object
     # [producers] RDF predicate: http://schema.org/producer; returns: Enumerable of WorldCat::Discovery::Person objects
     # [musicBy] RDF predicate: http://schema.org/musicBy; returns: Enumerable of WorldCat::Discovery::Person objects
-    # [productionCompany] RDF predicate: http://schema.org/productionCompany; returns: Enumerable of WorldCat::Discovery::Organization objects
+    # [productionCompany] RDF predicate: http://schema.org/productionCompany; returns: WorldCat::Discovery::Organization object
     
     class Movie < Bib
       

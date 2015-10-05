@@ -25,6 +25,7 @@ module WorldCat
     #
     # [type] RDF predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type; returns: RDF::URI
     # [name] RDF predicate: http://schema.org/name; returns: String
+    # [alternateName] RDF predicate: http://schema.org/alternateName; returns: String
     # [oclc_number] RDF predicate: http://purl.org/library/oclcnum; returns: Integer
     # [work_uri] RDF predicate: http://schema.org/exampleOfWork; returns: RDF::URI
     # [num_pages] RDF predicate: http://schema.org/numberOfPages; returns: String
@@ -46,6 +47,7 @@ module WorldCat
       attr_accessor :response_body, :response_code, :result
       
       property :name, :predicate => SCHEMA_NAME, :type => XSD.string
+      property :alternate_name, :predicate => SCHEMA_ALT_NAME, :type => XSD.string
       property :oclc_number, :predicate => LIB_OCLC_NUMBER, :type => XSD.integer
       property :work_uri, :predicate => SCHEMA_EXAMPLE_OF_WORK, :type => RDF::URI
       property :num_pages, :predicate => SCHEMA_NUMBER_OF_PAGES, :type => XSD.string
@@ -179,6 +181,8 @@ module WorldCat
       
       def self.choseBestType(bib)
         case
+        when bib.types.include?(RDF::URI(SCHEMA_MUSIC_ALBUM))
+          bib.subject.as(MusicAlbum)
         when bib.types.include?(RDF::URI(SCHEMA_MOVIE))
           bib.subject.as(Movie)
         else

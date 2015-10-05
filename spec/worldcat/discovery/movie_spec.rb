@@ -14,7 +14,7 @@
 
 require_relative '../../spec_helper'
 
-describe WorldCat::Discovery::Bib do
+describe WorldCat::Discovery::Movie do
   
   context "when loading bibliographic data for a movie" do
     before(:all) do
