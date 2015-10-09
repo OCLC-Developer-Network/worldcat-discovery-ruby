@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
 describe WorldCat::Discovery::Movie do
   
@@ -180,7 +180,7 @@ describe WorldCat::Discovery::Movie do
         descriptions = @bib.descriptions
         descriptions.size.should == 2
 
-        File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/62774704_descriptions.txt").each do |line|
+        File.open("#{File.expand_path(File.dirname(__FILE__))}/../../../support/text/62774704_descriptions.txt").each do |line|
           descriptions.should include(line.chomp)
         end
       end

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative '../../spec_helper'
+require_relative '../../../spec_helper'
 
 describe WorldCat::Discovery::MusicAlbum do
   
@@ -149,7 +149,7 @@ describe WorldCat::Discovery::MusicAlbum do
         descriptions = @bib.descriptions
         descriptions.size.should == 1
 
-        File.open("#{File.expand_path(File.dirname(__FILE__))}/../../support/text/226390945_descriptions.txt").each do |line|
+        File.open("#{File.expand_path(File.dirname(__FILE__))}/../../../support/text/226390945_descriptions.txt").each do |line|
           descriptions.should include(line.chomp)
         end
       end

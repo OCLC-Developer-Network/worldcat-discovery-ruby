@@ -85,6 +85,15 @@ module WorldCat
     SCHEMA_PERFORMER         = RDF::URI.new('http://schema.org/performer')
     SCHEMA_HAS_PART          = RDF::URI.new('http://schema.org/hasPart')
     RDF_SEE_ALSO             = RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#seeAlso')
+    SCHEMA_ARTICLE           = RDF::URI.new('http://schema.org/Article')
+    SCHEMA_PAGE_START        = RDF::URI.new('http://schema.org/pageStart')
+    SCHEMA_PAGE_END          = RDF::URI.new('http://schema.org/pageEnd')
+    SCHEMA_PUBLICATION_ISSUE = RDF::URI.new('http://schema.org/PublicationIssue')
+    SCHEMA_ISSUE_NUMBER      = RDF::URI.new('http://schema.org/issueNumber')
+    SCHEMA_PUBLICATION_VOLUME = RDF::URI.new('http://schema.org/PublicationVolume')
+    SCHEMA_VOLUME_NUMBER     = RDF::URI.new('http://schema.org/volumeNumber')
+    SCHEMA_PERIODICAL        = RDF::URI.new('http://schema.org/Periodical')
+    SCHEMA_IS_SIMILAR_TO     = RDF::URI.new('http://schema.org/isSimilarTo')
     
   end
 end

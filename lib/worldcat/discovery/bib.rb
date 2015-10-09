@@ -181,6 +181,8 @@ module WorldCat
       
       def self.choseBestType(bib)
         case
+        when bib.types.include?(RDF::URI(SCHEMA_ARTICLE))
+          bib.subject.as(Article)  
         when bib.types.include?(RDF::URI(SCHEMA_MUSIC_ALBUM))
           bib.subject.as(MusicAlbum)
         when bib.types.include?(RDF::URI(SCHEMA_MOVIE))
