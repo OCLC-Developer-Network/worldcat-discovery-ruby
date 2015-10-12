@@ -21,11 +21,13 @@ module WorldCat
     # 
     # [page_start] RDF predicate: http://schema.org/name; returns: String
     # [page_end] RDF predicate: http://schema.org/name; returns: String
+    # [pagination] RDF predicate: http://schema.org/pagination; returns: String
     
     class Article < Bib
       
       property :page_start, :predicate => SCHEMA_PAGE_START, :type => XSD.integer
       property :page_end, :predicate => SCHEMA_PAGE_END, :type => XSD.integer
+      property :pagination, :predicate => SCHEMA_PAGINATION, :type => XSD.string
       
       def is_part_of
         part_of_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_IS_PART_OF).first
@@ -44,12 +46,15 @@ module WorldCat
       end
       
       def periodical_name
-        # when periodical only had a volume
+        # when article only had a volume
         if self.is_part_of.class == WorldCat::Discovery::PublicationVolume
           self.is_part_of.periodical.name
-        # when periodical has issue and volume
+        # when article has issue and volume
         elsif self.is_part_of.class == WorldCat::Discovery::PublicationIssue
           self.is_part_of.volume.periodical.name
+        # when the article doesn't have issue or volume
+        elsif self.is_part_of.class == WorldCat::Discovery::Periodical
+          self.is_part_of.name  
         else
           nil
         end
@@ -62,6 +67,9 @@ module WorldCat
         # when periodical has issue and volume
         elsif self.is_part_of.class == WorldCat::Discovery::PublicationIssue
           self.is_part_of.volume.periodical.publisher
+        # when the article doesn't have issue or volume  
+        elsif self.is_part_of.class == WorldCat::Discovery::Periodical
+          self.is_part_of.publisher
         else
           nil
         end

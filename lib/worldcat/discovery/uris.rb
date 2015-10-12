@@ -40,6 +40,7 @@ module WorldCat
     SCHEMA_REVIEW_BODY     = RDF::URI.new('http://schema.org/reviewBody')
     SCHEMA_SEARCH_RES_PAGE = RDF::URI.new('http://schema.org/SearchResultsPage')
     SCHEMA_BOOK_EDITION    = RDF::URI.new('http://schema.org/bookEdition')
+    SCHEMA_URL             = RDF::URI.new('http://schema.org/url')
     SCHEMA_ITEM_OFFERED    = RDF::URI.new('http://schema.org/itemOffered')
     SCHEMA_SOME_PRODUCTS   = RDF::URI.new('http://schema.org/SomeProducts')
     SCHEMA_LIBRARY         = RDF::URI.new('http://schema.org/Library')
@@ -85,15 +86,18 @@ module WorldCat
     SCHEMA_PERFORMER         = RDF::URI.new('http://schema.org/performer')
     SCHEMA_HAS_PART          = RDF::URI.new('http://schema.org/hasPart')
     RDF_SEE_ALSO             = RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#seeAlso')
+    RDFS_LABEL                = RDF::URI.new('http://www.w3.org/2000/01/rdf-schema#label')
     SCHEMA_ARTICLE           = RDF::URI.new('http://schema.org/Article')
     SCHEMA_PAGE_START        = RDF::URI.new('http://schema.org/pageStart')
     SCHEMA_PAGE_END          = RDF::URI.new('http://schema.org/pageEnd')
+    SCHEMA_PAGINATION        = RDF::URI.new('http://schema.org/pagination')
     SCHEMA_PUBLICATION_ISSUE = RDF::URI.new('http://schema.org/PublicationIssue')
     SCHEMA_ISSUE_NUMBER      = RDF::URI.new('http://schema.org/issueNumber')
     SCHEMA_PUBLICATION_VOLUME = RDF::URI.new('http://schema.org/PublicationVolume')
     SCHEMA_VOLUME_NUMBER     = RDF::URI.new('http://schema.org/volumeNumber')
     SCHEMA_PERIODICAL        = RDF::URI.new('http://schema.org/Periodical')
+    SCHEMA_ISSN              = RDF::URI.new('http://schema.org/issn')
     SCHEMA_IS_SIMILAR_TO     = RDF::URI.new('http://schema.org/isSimilarTo')
-    
+    UMBEL_IS_LIKE            = RDF::URI.new('http://umbel.org/umbel#isLike')
   end
 end

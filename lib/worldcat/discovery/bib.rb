@@ -24,7 +24,6 @@ module WorldCat
     #   bib.oclc_number # => 255034622
     #
     # [type] RDF predicate: http://www.w3.org/1999/02/22-rdf-syntax-ns#type; returns: RDF::URI
-    # [name] RDF predicate: http://schema.org/name; returns: String
     # [alternateName] RDF predicate: http://schema.org/alternateName; returns: String
     # [oclc_number] RDF predicate: http://purl.org/library/oclcnum; returns: Integer
     # [work_uri] RDF predicate: http://schema.org/exampleOfWork; returns: RDF::URI
@@ -35,6 +34,7 @@ module WorldCat
     # [publisher] RDF predicate: http://schema.org/publisher; returns: WorldCat::Discovery::Organization
     # [display_position] RDF predicate: http://purl.org/goodrelations/v1#displayPosition; returns: Integer
     # [book_edition] RDF predicate: http://schema.org/bookEdition; returns: String
+    # [url] RDF predicate: http://schema.org/url; returns: String
     # [subjects] RDF predicate: http://schema.org/about; returns: Enumerable of WorldCat::Discovery::Subject objects
     # [work_examples] RDF predicate: http://schema.org/workExample; returns: Enumerable of WorldCat::Discovery::ProductModel objects
     # [places_of_publication] RDF predicate: http://purl.org/library/placeOfPublication; returns: Enumerable of WorldCat::Discovery::Place objects
@@ -46,7 +46,6 @@ module WorldCat
       
       attr_accessor :response_body, :response_code, :result
       
-      property :name, :predicate => SCHEMA_NAME, :type => XSD.string
       property :alternate_name, :predicate => SCHEMA_ALT_NAME, :type => XSD.string
       property :oclc_number, :predicate => LIB_OCLC_NUMBER, :type => XSD.integer
       property :work_uri, :predicate => SCHEMA_EXAMPLE_OF_WORK, :type => RDF::URI
@@ -58,6 +57,7 @@ module WorldCat
       property :publisher, :predicate => SCHEMA_PUBLISHER, :type => 'Organization'
       property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
       property :book_edition, :predicate => SCHEMA_BOOK_EDITION, :type => XSD.string
+      property :url, :predicate => SCHEMA_URL, :type => RDF::URI
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
       has_many :work_examples, :predicate => SCHEMA_WORK_EXAMPLE, :type => 'ProductModel'
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
@@ -72,6 +72,16 @@ module WorldCat
       # Will return the RDF::URI object that serves as the RDF subject of the current Bib
       def id
         self.subject
+      end
+      
+      # call-seq
+      # name() 
+      # RDF predicate: http://schema.org/name or the http://www.w3.org/2000/01/rdf-schema#label returns: String 
+      def name
+        name = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_NAME).first
+        name = Spira.repository.query(:subject => self.id, :predicate => RDFS_LABEL).first if name.nil?
+        name.object.to_s
+        
       end
       
       # call-seq:
@@ -187,6 +197,8 @@ module WorldCat
           bib.subject.as(MusicAlbum)
         when bib.types.include?(RDF::URI(SCHEMA_MOVIE))
           bib.subject.as(Movie)
+        when bib.types.include?(RDF::URI(SCHEMA_PERIODICAL))
+          bib.subject.as(Periodical)  
         else
           bib
         end

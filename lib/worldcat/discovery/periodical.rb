@@ -31,8 +31,12 @@ module WorldCat
       # Returns issn from RDF predicate: http://schema.org/issn
       def issn
         is_like = Spira.repository.query(:subject => self.work_uri, :predicate => UMBEL_IS_LIKE).first
-        issn = Spira.repository.query(:subject => is_like.object, :predicate => SCHEMA_ISSN).first
-        issn
+        if is_like
+          issn = Spira.repository.query(:subject => is_like.object, :predicate => SCHEMA_ISSN).first
+        else
+          issn = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_ISSN).first
+        end
+        issn.object
       end
       
     end
