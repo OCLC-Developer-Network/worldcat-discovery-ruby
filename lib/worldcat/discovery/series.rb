@@ -15,22 +15,19 @@
 module WorldCat
   module Discovery
     
-    class Periodical < Bib
+    # == Properties mapped from RDF data
+    #
+    # RDF properties are mapped via an ORM style mapping.
+    # 
+    # [name] RDF predicate: http:/schema.org/name; returns: String 
+    # [parts] RDF predicate: http://schema.org/hasPart; returns: Enumerable of WorldCat::Discovery::Bib objects
+    
+    class Series < Spira::Base
       
-      # call-seq:
-      #   issn() => string
-      # 
-      # Returns issn from RDF predicate: http://schema.org/issn
-      def issn
-        is_like = Spira.repository.query(:subject => self.work_uri, :predicate => UMBEL_IS_LIKE).first
-        if is_like
-          issn = Spira.repository.query(:subject => is_like.object, :predicate => SCHEMA_ISSN).first
-        else
-          issn = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_ISSN).first
-        end
-        issn.object
-      end
-      
+      property :name, :predicate => SCHEMA_NAME, :type => XSD.string
+      property :creator, :predicate => SCHEMA_CREATOR, :type => 'Person'
+      has_many :parts, :predicate => SCHEMA_HAS_PART, :type => 'Bib'
+
     end
   end
 end

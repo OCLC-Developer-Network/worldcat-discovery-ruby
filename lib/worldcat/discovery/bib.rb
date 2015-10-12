@@ -41,6 +41,8 @@ module WorldCat
     # [descriptions] RDF predicate: http://schema.org/description; returns: Enumerable of String objects
     # [reviews] RDF predicate: http://schema.org/reviews; returns: Enumerable of WorldCat::Discovery::Review objects
     # [contributors] RDF predicate: http://schema.org/contributor; returns: Enumerable of WorldCat::Discovery::Person objects
+    # [is_part_of] RDF predicate: http://schema.org/isPartOf; returns: WorldCat::Discovery::Series
+    # [similar_to] RDF predicate: http://schema.org/musicBy; returns: WorldCat::Discovery::Bib object
     
     class Bib < Spira::Base
       
@@ -65,6 +67,8 @@ module WorldCat
       has_many :reviews, :predicate => SCHEMA_REVIEW, :type => 'Review'
       has_many :contributors, :predicate => SCHEMA_CONTRIBUTOR, :type => 'Person'
       has_many :types, :predicate => RDF.type, :type => RDF::URI
+      has_many :parts_of, :predicate => SCHEMA_IS_PART_OF, :type => 'Series'
+      property :similar_to, :predicate => SCHEMA_IS_SIMILAR_TO, :type => 'Bib'
       
       # call-seq:
       #   id() => RDF::URI
