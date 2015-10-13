@@ -35,6 +35,7 @@ module WorldCat
     # [display_position] RDF predicate: http://purl.org/goodrelations/v1#displayPosition; returns: Integer
     # [book_edition] RDF predicate: http://schema.org/bookEdition; returns: String
     # [url] RDF predicate: http://schema.org/url; returns: String
+    # [urls] RDF predicate: https://schema.org/url; returns Enumerable of strings
     # [subjects] RDF predicate: http://schema.org/about; returns: Enumerable of WorldCat::Discovery::Subject objects
     # [work_examples] RDF predicate: http://schema.org/workExample; returns: Enumerable of WorldCat::Discovery::ProductModel objects
     # [places_of_publication] RDF predicate: http://purl.org/library/placeOfPublication; returns: Enumerable of WorldCat::Discovery::Place objects
@@ -43,6 +44,13 @@ module WorldCat
     # [contributors] RDF predicate: http://schema.org/contributor; returns: Enumerable of WorldCat::Discovery::Person objects
     # [is_part_of] RDF predicate: http://schema.org/isPartOf; returns: WorldCat::Discovery::Series
     # [similar_to] RDF predicate: http://schema.org/musicBy; returns: WorldCat::Discovery::Bib object
+    # [awards] RDF predicate: http://schema.org/awards, returns: Enumerable of strings
+    # [content_rating] RDF predicate: http://schema.org/contentRating, returns string    
+    # [genres] RDF predicate: http://schema.org/genre, returns: Enumerable of WorldCat::Discovery Genre objects
+    # [illustrators] RDF predicate: http://schema.org/illustrator; returns Enumerable of WorldCat::Discovery::Person objects
+    # [copyright_year] RDF predicate: http://schema.org/copyrightYear; returns string
+    # [book_format] RDF predicate: http://schema.org/bookFormat; returns RDF::URI
+    # [editors] RDF predicate: http://schema.org/editor returns: Enumerable of WorldCat::Discovery::Person objects
     
     class Bib < Spira::Base
       
@@ -60,6 +68,7 @@ module WorldCat
       property :display_position, :predicate => GOOD_RELATIONS_POSITION, :type => XSD.integer
       property :book_edition, :predicate => SCHEMA_BOOK_EDITION, :type => XSD.string
       property :url, :predicate => SCHEMA_URL, :type => RDF::URI
+      has_many :urls, :predicate => SCHEMA_URL, :type => RDF::URI
       has_many :subjects, :predicate => SCHEMA_ABOUT, :type => 'Subject'
       has_many :work_examples, :predicate => SCHEMA_WORK_EXAMPLE, :type => 'ProductModel'
       has_many :places_of_publication, :predicate => LIB_PLACE_OF_PUB, :type => 'Place'
@@ -69,6 +78,14 @@ module WorldCat
       has_many :types, :predicate => RDF.type, :type => RDF::URI
       has_many :parts_of, :predicate => SCHEMA_IS_PART_OF, :type => 'Series'
       property :similar_to, :predicate => SCHEMA_IS_SIMILAR_TO, :type => 'Bib'
+      has_many :awards, :predicate => SCHEMA_AWARDS, :type => XSD.string
+      property :content_rating, :predicate => SCHEMA_CONTENT_RATING, :type => XSD.string
+      has_many :illustrators, :predicate => SCHEMA_ILLUSTRATOR, :type => 'Person'
+      has_many :genres, :predicate => SCHEMA_GENRE, :type => XSD.string
+      property :copyright_year, :predicate => SCHEMA_COPYRIGHT_YEAR, :type => XSD.string
+      property :book_format, :predicate => SCHEMA_BOOK_FORMAT, :type => RDF::URI
+      has_many :editors, :predicate => SCHEMA_EDITOR, :type => 'Person'
+      
       
       # call-seq:
       #   id() => RDF::URI
@@ -116,6 +133,29 @@ module WorldCat
       # Convenience method for an Array of ISBN strings from the associated WorldCat::Discovery::ProductModel objects
       def isbns
         self.work_examples.map {|product_model| product_model.isbns}.flatten.sort
+      end
+      
+      
+      # call-seq:
+      # audience() => string
+      def audience
+        audience_stmt = Spira.repository.query(:subject => self.id, :predicate => SCHEMA_AUDIENCE).first
+        audience = Spira.repository.query(:subject => audience_stmt.object, :predicate => SCHEMA_AUDIENCE_TYPE).first
+        audience.object.to_s
+      end
+      
+      # call-seq:
+      #   data_sets() => Array of URI objects
+      def data_sets
+        described_by = Spira.repository.query(:subject => self.id, :predicate => WDRS_DESCRIBED_BY).first
+        if described_by.object
+          datasets = Spira.repository.query(:subject => described_by.object, :predicate => VOID_IN_DATASET)
+        else
+          described_by = self.urls.select {|url| url.object[/worldcat.org\/title$/]}.flatten
+          datasets = Spira.repository.query(:subject => described_by.object, :predicate => VOID_IN_DATASET).first
+        end
+        
+        datasets
       end
       
       # call-seq:

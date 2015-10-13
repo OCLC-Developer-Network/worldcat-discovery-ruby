@@ -173,7 +173,84 @@ describe WorldCat::Discovery::Bib do
       it "should have the right isbns" do
         @bib.isbns.sort.should == ["0631193618", "0631193626", "9780631193616", "9780631193623"]
       end
+      
+      it "should have the right data_sets" do
+        @bib.data_sets.should include(RDF::URI("http://purl.oclc.org/dataset/WorldCat"))
+      end
     end
+      
+    context "from a single resource from the RDF data for 7977212" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/data/7977212'
+        stub_request(:get, url).to_return(:body => body_content("7977212.rdf"), :status => 200)
+        @bib = WorldCat::Discovery::Bib.find(7977212)
+      end  
+          
+      it "should have the right genres" do
+        @bib.genres.sort.should == ["Poetry"]
+      end
+        
+      it "should return the right copyright_year" do
+        @bib.copyright_year.should == "1939"
+      end
+        
+    end
+    
+    context "from a single resource from the RDF data for 15317067" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/data/15317067'
+        stub_request(:get, url).to_return(:body => body_content("15317067.rdf"), :status => 200)
+        @bib = WorldCat::Discovery::Bib.find(15317067)
+      end 
+            
+      it "should have the right audience" do
+        @bib.audience.should == "Juvenile"
+      end 
+      
+      it "should have the right illustrators" do
+        @bib.illustrators.size.should == 1
+        illustrator = @bib.illustrators.first
+        illustrator.class.should == WorldCat::Discovery::Person
+        illustrator.name.should == "Bernadette Watts"
+      end
+      
+      it "should return the right book_format" do
+        @bib.book_format.should == RDF::URI("http://bibliograph.net/PrintBook")
+      end     
+    end
+      
+    context "from a single resource from the RDF data for 41266045" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/data/41266045'
+        stub_request(:get, url).to_return(:body => body_content("41266045.rdf"), :status => 200)
+        @bib = WorldCat::Discovery::Bib.find(41266045)
+      end 
+            
+      it "should have the right awards" do
+       @bib.awards.should include("ALA Notable Children's Book, 2000.")
+       @bib.awards.should include("Whitbread Children's Book of the Year, 1999.")
+      end
+      
+      it "should have the right content_rating" do
+        @bib.content_rating.should == "Middle School."   
+      end
+    end
+
+    context "from a single resource from the RDF data for 1004282" do
+      before(:all) do
+        url = 'https://beta.worldcat.org/discovery/bib/data/1004282'
+        stub_request(:get, url).to_return(:body => body_content("1004282.rdf"), :status => 200)
+        @bib = WorldCat::Discovery::Bib.find(1004282)
+      end  
+          
+      it "should return the right editors" do
+        @bib.editors.size.should == 1
+        editor = @bib.editors.first
+        editor.class.should == WorldCat::Discovery::Person
+        editor.name.should == "Dunn, Jacob Piatt, 1855-1924."
+      end
+    end
+      
 
     context "from a single resource from the RDF data for The Big Typescript" do
       before(:all) do

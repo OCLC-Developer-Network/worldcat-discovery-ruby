@@ -99,5 +99,16 @@ module WorldCat
     SCHEMA_ISSN              = RDF::URI.new('http://schema.org/issn')
     SCHEMA_IS_SIMILAR_TO     = RDF::URI.new('http://schema.org/isSimilarTo')
     UMBEL_IS_LIKE            = RDF::URI.new('http://umbel.org/umbel#isLike')
+    SCHEMA_AWARDS            = RDF::URI.new('http://schema.org/awards')
+    SCHEMA_CONTENT_RATING    = RDF::URI.new('http://schema.org/contentRating')
+    SCHEMA_GENRE             = RDF::URI.new('http://schema.org/genre')
+    SCHEMA_ILLUSTRATOR       = RDF::URI.new('http://schema.org/illustrator')
+    SCHEMA_COPYRIGHT_YEAR    = RDF::URI.new('http://schema.org/copyrightYear')
+    SCHEMA_BOOK_FORMAT       = RDF::URI.new('http://schema.org/bookFormat')
+    SCHEMA_EDITOR            = RDF::URI.new('http://schema.org/editor')
+    SCHEMA_AUDIENCE          = RDF::URI.new('http://schema.org/audience')
+    SCHEMA_AUDIENCE_TYPE     = RDF::URI.new('http://schema.org/audienceType')
+    WDRS_DESCRIBED_BY        = RDF::URI.new('http://www.w3.org/2007/05/powder-s#describedby')
+    VOID_IN_DATASET          = RDF::URI.new('http://rdfs.org/ns/void#inDataset')
   end
 end
