@@ -51,6 +51,7 @@ module WorldCat
     # [copyright_year] RDF predicate: http://schema.org/copyrightYear; returns string
     # [book_format] RDF predicate: http://schema.org/bookFormat; returns RDF::URI
     # [editors] RDF predicate: http://schema.org/editor returns: Enumerable of WorldCat::Discovery::Person objects
+    # [described_by RDF predicate: http://www.w3.org/2007/05/powder-s#describedby returns: WorldCat::Discovery::GenericResource object
     
     class Bib < Spira::Base
       
@@ -85,7 +86,7 @@ module WorldCat
       property :copyright_year, :predicate => SCHEMA_COPYRIGHT_YEAR, :type => XSD.string
       property :book_format, :predicate => SCHEMA_BOOK_FORMAT, :type => RDF::URI
       has_many :editors, :predicate => SCHEMA_EDITOR, :type => 'Person'
-      
+      property :described_by, :predicate => WDRS_DESCRIBED_BY, :type=> 'GenericResource'
       
       # call-seq:
       #   id() => RDF::URI
@@ -147,15 +148,7 @@ module WorldCat
       # call-seq:
       #   data_sets() => Array of URI objects
       def data_sets
-        described_by = Spira.repository.query(:subject => self.id, :predicate => WDRS_DESCRIBED_BY).first
-        if described_by.object
-          datasets = Spira.repository.query(:subject => described_by.object, :predicate => VOID_IN_DATASET)
-        else
-          described_by = self.urls.select {|url| url.object[/worldcat.org\/title$/]}.flatten
-          datasets = Spira.repository.query(:subject => described_by.object, :predicate => VOID_IN_DATASET).first
-        end
-        
-        datasets
+        self.described_by.datasets
       end
       
       # call-seq:
@@ -213,7 +206,7 @@ module WorldCat
           bib.response_code = response.code
           bib.result = result
           
-          bib = self.choseBestType(bib)
+          bib = self.choose_best_type(bib)
           
           bib
           
@@ -233,7 +226,7 @@ module WorldCat
         "https://beta.worldcat.org/discovery/bib"
       end
       
-      def self.choseBestType(bib)
+      def self.choose_best_type(bib)
         case
         when bib.types.include?(RDF::URI(SCHEMA_ARTICLE))
           bib.subject.as(Article)  

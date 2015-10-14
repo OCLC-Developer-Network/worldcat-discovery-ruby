@@ -22,6 +22,8 @@ module WorldCat
     class GenericResource < Spira::Base
       
       property :about, :predicate => SCHEMA_ABOUT, :type => 'Bib'
+      has_many :datasets, :predicate => VOID_IN_DATASET, :type => RDF::URI
+      property :date_modified, :predicate => SCHEMA_DATE_MODIFIED, :type => XSD.string
       
     end
   end

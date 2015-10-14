@@ -110,5 +110,6 @@ module WorldCat
     SCHEMA_AUDIENCE_TYPE     = RDF::URI.new('http://schema.org/audienceType')
     WDRS_DESCRIBED_BY        = RDF::URI.new('http://www.w3.org/2007/05/powder-s#describedby')
     VOID_IN_DATASET          = RDF::URI.new('http://rdfs.org/ns/void#inDataset')
+    SCHEMA_DATE_MODIFIED     = RDF::URI.new('http://schema.org/dateModified')
   end
 end

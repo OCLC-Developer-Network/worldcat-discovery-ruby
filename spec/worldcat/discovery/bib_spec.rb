@@ -177,6 +177,7 @@ describe WorldCat::Discovery::Bib do
       it "should have the right data_sets" do
         @bib.data_sets.should include(RDF::URI("http://purl.oclc.org/dataset/WorldCat"))
       end
+
     end
       
     context "from a single resource from the RDF data for 7977212" do
@@ -192,6 +193,10 @@ describe WorldCat::Discovery::Bib do
         
       it "should return the right copyright_year" do
         @bib.copyright_year.should == "1939"
+      end
+      
+      it "should have the right date_modified" do
+        @bib.described_by.date_modified.should == "2015-05-28"
       end
         
     end
