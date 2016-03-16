@@ -13,6 +13,7 @@ process for the [OCLC::Auth](https://github.com/OCLC-Developer-Network/oclc-auth
 ```bash
 $ git clone https://github.com/OCLC-Developer-Network/worldcat-discovery-ruby.git
 $ cd worldcat-discovery-ruby
+$ bundle install
 $ gem build worldcat-discovery.gemspec
 $ gem install worldcat-discovery-<VERSION-NUMBER>.gem
 ```
