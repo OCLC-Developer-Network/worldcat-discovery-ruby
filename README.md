@@ -84,8 +84,8 @@ bib.author.name     # => "Feyrer, James"
 bib.contributors.map{|contributor| contributor.name} # => ["Sacerdote, Bruce", "Feyrer, James"]
 bib.page_start      # => 125
 bib.page_end        # => 128
-bib.periodical_name # => "American Economic Review"
-bib.volume_number   # => 3
-bib.issue_number    # => 103
+bib.periodical.name # => "American Economic Review"
+bib.volume.volume_number   # => 3
+bib.issue.issue_number    # => 103
 
 ```

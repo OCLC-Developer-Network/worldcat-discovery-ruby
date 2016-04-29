@@ -93,30 +93,31 @@ describe WorldCat::Discovery::Article do
         @bib.page_end.should == 128
       end
       
-      it "should have the right periodical_name" do
-        @bib.periodical_name.should == "American Economic Review"
+      it "should have the right periodical" do
+        @bib.periodical.class.should == WorldCat::Discovery::Periodical
+      end
+      
+      it "should have the right periodical info" do
+        @bib.periodical.id == "http://worldcat.org/issn/0002-8282"
+        @bib.periodical.name.should == "American Economic Review"
+      end
+      
+      it "should have the right volume" do
+        @bib.volume.class.should == WorldCat::Discovery::PublicationVolume
       end
       
       it "should have the right volume_number" do
-        @bib.volume_number.should == 103
+        @bib.volume.id == "http://worldcat.org/issn/0002-8282"
+        @bib.volume.volume_number.should == 103
       end
+      
+      it "should have the right issue" do
+        @bib.issue.class.should == WorldCat::Discovery::PublicationIssue
+      end      
       
       it "should have the right issue_number" do
-        @bib.issue_number.should == 3
-      end
-      
-      it "should have the right is_part_of" do
-        @bib.is_part_of.class.should == WorldCat::Discovery::PublicationIssue
-        @bib.is_part_of.issue_number.should == 3
-        
-        volume = @bib.is_part_of.volume
-        volume.class.should == WorldCat::Discovery::PublicationVolume
-        volume.volume_number.should == 103
-        
-        periodical = volume.periodical
-        periodical.class.should == WorldCat::Discovery::Periodical
-        periodical.id == "http://worldcat.org/issn/0002-8282"
-        periodical.name == "American Economic Review" 
+        @bib.issue.id == "http://worldcat.org/issn/0002-8282"
+        @bib.issue.issue_number.should == 3
       end
       
       it "should have the right same_as" do
@@ -194,18 +195,30 @@ describe WorldCat::Discovery::Article do
         @bib.pagination.should == "issue 14 (July 25, 2011)"
       end
       
-      it "should have the right periodical_name" do
-        @bib.periodical_name.should == "Code4lib journal"
+      it "should have the right periodical" do
+        @bib.periodical.class.should == WorldCat::Discovery::Periodical
       end
       
-      it "should have the right is_part_of" do
-        @bib.is_part_of.class.should == WorldCat::Discovery::Periodical
-        @bib.is_part_of.id.should == "http://worldcat.org/issn/1940-5758"
-        @bib.is_part_of.issn.should == "1940-5758"
+      it "should have the right periodical info" do
+        @bib.periodical.name.should == "Code4lib journal"
+        @bib.periodical.id.should == "http://worldcat.org/issn/1940-5758"
+        @bib.periodical.issn.should == "1940-5758"
+      end
+      
+      it "should not have a volume" do
+        @bib.volume.should be_nil
+      end
+      
+      it "should not have an issue" do
+        @bib.issue.should be_nil
       end
       
       it "should have the right url" do
         @bib.url.should == "http://journal.code4lib.org/articles/5645"
+      end
+      
+      it "should have the right publisher" do
+        @bib.publisher.should be_nil
       end
           
       end
