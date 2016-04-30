@@ -127,6 +127,103 @@ describe WorldCat::Discovery::Article do
     end
   end
   
+  context "when loading bibliographic data for an article with no issue (204144725)" do
+    before(:all) do
+          wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
+          WorldCat::Discovery.configure(wskey, 128807, 128807)
+          url = 'https://authn.sd00.worldcat.org/oauth2/accessToken?authenticatingInstitutionId=128807&contextInstitutionId=128807&grant_type=client_credentials&scope=WorldCatDiscoveryAPI'
+          stub_request(:post, url).to_return(:body => body_content("token.json"), :status => 200)
+    end
+        
+        context "from a single resource from the RDF data for an article" do
+          before(:all) do
+            url = 'https://beta.worldcat.org/discovery/bib/data/204144725'
+            stub_request(:get, url).to_return(:body => body_content("204144725.rdf"), :status => 200)
+            @bib = WorldCat::Discovery::Bib.find(204144725)
+          end
+        
+          it "should have the right id" do
+            @bib.id.should == "http://www.worldcat.org/oclc/204144725"
+          end
+        
+          it "should have the right name" do
+            @bib.name.should == "Van Gogh's Rediscovered Night Sky What brilliant celestial object did Vincent van Gogh include in his painting White House at Night?"
+          end
+        
+          it "should have the right OCLC number" do
+            @bib.oclc_number.should == 204144725
+          end
+        
+          it "should have the right work URI" do
+            @bib.work_uri.should == RDF::URI.new('http://worldcat.org/entity/work/id/79276497')
+          end
+              
+          it "should have the right date published" do
+            @bib.date_published.should == "2001"
+          end
+          
+          it "should be the right class" do
+            @bib.class.should == WorldCat::Discovery::Article
+          end
+          
+          it "should have the right language" do
+            @bib.language.should == "en"
+          end
+          
+          it "should have the right author" do
+            @bib.author.class.should == WorldCat::Discovery::Person
+            @bib.author.name.should == "Olson, D. W."
+          end
+          
+          it "should have the right contributors" do
+            @bib.contributors.size.should == 1
+            contributor = @bib.contributors.first
+            contributor.class.should == WorldCat::Discovery::Person
+            contributor.name.should == "Doescher, R. L."
+          end
+          
+          it "should have the right descriptions" do
+            descriptions = @bib.descriptions
+            descriptions.size.should == 0 
+          end
+          
+          it "should have the right periodical" do
+            @bib.periodical.class.should == WorldCat::Discovery::Periodical
+          end
+          
+          it "should have the right periodical info" do
+            @bib.periodical.name.should == "SKY AND TELESCOPE"
+            @bib.periodical.id.should == "http://worldcat.org/issn/0037-6604"
+            @bib.periodical.issn.should == "0037-6604"
+          end
+          
+          it "should have the right volume" do
+            @bib.volume.class.should == WorldCat::Discovery::PublicationVolume
+          end
+          
+          it "should have the right volume_number" do
+            @bib.volume.id == "http://worldcat.org/issn/0037-6604#101"
+            @bib.volume.volume_number.should == 101
+          end
+          
+          it "should not have an issue" do
+            @bib.issue.should be_nil
+          end
+          
+          it "should have the right publisher" do
+            @bib.publisher.should be_nil
+          end
+          
+          it "should have the right page_start" do
+            @bib.page_start.should == 34
+          end
+          
+          it "should have the right page_end" do
+            @bib.page_end.should be_nil
+          end
+     end    
+  end
+  
   context "when loading bibliographic data for article with no issue/volume (777986070)" do
     before(:all) do
       wskey = OCLC::Auth::WSKey.new('api-key', 'api-key-secret', :services => ['WorldCatDiscoveryAPI'])
