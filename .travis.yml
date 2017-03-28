@@ -1,0 +1,18 @@
+language: ruby
+
+before_install:
+  - rvm get head
+  - gem install bundler
+
+rvm:
+  - 2.2
+  - 2.3.3
+  - 2.4.0
+  
+# configure notifications (email, IRC, campfire etc)
+notifications:
+    email:
+        recipients:
+        - coombsk@oclc.org
+        on_success: always
+        on_failure: always
