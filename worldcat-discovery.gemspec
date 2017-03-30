@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'equivalent-xml', '~> 0.4', '>= 0.4.2'
   spec.add_runtime_dependency 'rdf', '~> 1.1', '>= 1.1.2.1'
   spec.add_runtime_dependency 'rdf-rdfxml', '~> 1.1', '>= 1.1.0.1'
-  spec.add_runtime_dependency 'oclc-auth', '~> 0.1', '>= 0.1.0'
+  spec.add_runtime_dependency 'oclc-auth', '~> 1.0', '>= 1.0.0'
   spec.add_runtime_dependency 'spira', '~> 0.7', '>= 0.7.1'
   spec.add_runtime_dependency 'rest-client', '~> 1.6', '>= 1.6.7'
   spec.add_runtime_dependency 'addressable', '~> 2.3', '>= 2.3.6'
