@@ -21,15 +21,15 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'equivalent-xml', '~> 0.4', '>= 0.4.2'
   spec.add_runtime_dependency 'rdf', '~> 1.1', '>= 1.1.2.1'
   spec.add_runtime_dependency 'rdf-rdfxml', '~> 1.1', '>= 1.1.0.1'
-  spec.add_runtime_dependency 'oclc-auth', '~> 0.1', '>= 0.1.0'
+  spec.add_runtime_dependency 'oclc-auth', '~> 1.0', '>= 1.0.0'
   spec.add_runtime_dependency 'spira', '~> 0.7', '>= 0.7.1'
-  spec.add_runtime_dependency 'rest-client', '~> 1.6', '>= 1.6.7'
+  spec.add_runtime_dependency 'rest-client', '~> 2.0.1', '>= 2.0'
   spec.add_runtime_dependency 'addressable', '~> 2.3', '>= 2.3.6'
   
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   
-  spec.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.1'
-  spec.add_development_dependency 'simplecov', '~> 0.8', '>= 0.8.2'
-  spec.add_development_dependency 'webmock', '~> 1.16'
+  spec.add_development_dependency 'rspec', '~> 3.5', '>= 3.5'
+  spec.add_development_dependency 'simplecov', '~> 0.14', '>= 0.14.1'
+  spec.add_development_dependency 'webmock', '~> 2.3'
 end
