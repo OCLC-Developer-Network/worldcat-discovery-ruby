@@ -1,5 +1,7 @@
 # Worldcat::Discovery
 
+> **WARNING**: This library is no longer maintained. However, the code remains public as an example of how to use the API.
+
 Ruby gem wrapper around WorldCat Discovery API. 
 
 Please Note: This API is not yet in production and this documentation is only published for our group 
